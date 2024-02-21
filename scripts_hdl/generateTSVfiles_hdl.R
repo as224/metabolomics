@@ -32,35 +32,26 @@ generate_df <- function(input) {
   for (line in log) {
     # Get gwas1 path
     if (grepl("^gwas1\\.df=", line)) {
-      # cols$p1 <- sub("^gwas1\\.df=", "../", line)
-      # cols$p1_id <- sub("^.*?/pmid[0-9]+_(.*?)\\.hdl\\.rds$", "\\1", cols$p1)
       df$p1[1] <- sub("^gwas1\\.df=", "../", line)
-      df$p1_id[1] <- sub("^.*?/pmid[0-9]+_(.*?)\\.hdl\\.rds$", "\\1", df$p1[1])
+      df$p1_id[1] <- sub("^.*/output_wrangling_hdl/", "", gsub(".hdl.rds$", "", df$p1[1]))
     }
     
     # Get gwas2 path
     if (grepl("^gwas2\\.df=", line)) {
-      #cols$p2 <- sub("^gwas2\\.df=", "../", line)
-      #cols$p2_id <- sub("^.*?/pmid[0-9]+_(.*?)\\.hdl\\.rds$", "\\1", cols$p2)
       df$p2[1] <- sub("^gwas2\\.df=", "../", line)
-      df$p2_id[1] <- sub("^.*?/pmid[0-9]+_(.*?)\\.hdl\\.rds$", "\\1", df$p2[1])
+      df$p2_id[1] <- sub("^.*/output_wrangling_hdl/", "", gsub(".hdl.rds$", "", df$p2[1]))
     }
     
     # Get genetic covariance 
     if (grepl("^Genetic Correlation:", line)) {
-      #cols$rg <- sub("^Genetic Covariance:", "", line)
       df$rg <- sub("^Genetic Correlation:\\s+(-?\\d+\\.\\d+).*", "\\1", line)
     }
     
-    # Überprüfen, ob die Zeile Informationen zum p-Wert enthält
+    # Get p value
     if (grepl("^P:", line)) {
-      #cols$p <- sub("^P:", "", line)
       df$p <- sub("^P:", "", line)
     }
   }
-
-  # Umwandeln der Liste in einen Datenrahmen
-  #df <- as.data.frame(t(cols))
   
   # Add two cols to df
   df$id <- paste(df$p1_id, df$p2_id, sep = "/")
