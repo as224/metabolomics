@@ -71,7 +71,9 @@ trait_category_mapping <- c("IL" = "Cytokine",
                             "pyruvate" = "Other",
                             "citrate" = "Other",
                             "urea" = "Other",
-                            "glycerol" = "Other")
+                            "glycerol" = "Other",
+                            "T2d" = "Autoimmune",
+                            "LBD" = "Inflammatory")
 
 # Prerequisite for mapping the categories to the traits 
 df_ldsc$p1_helper <- df_ldsc$p1
