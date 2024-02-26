@@ -10,9 +10,11 @@ trait=$2	# eg. alanine
 # format columns
 awk -F"\t" -v t="$trait" '{print $1"\t"$17"\t"$18"\t"toupper($2)"\t"toupper($3)"\t"$4"\t"$8"\t"exp($8)"\t"$9"\t"$10"\t"t"\t"$16}' <(zcat < $gwas) > ${trait}_unfiltered.tsv # Alleles in upper case additionally
 
+# py script if needed to filter unvalid EAFs
+# python3 filter_EAF.py ${trait}_unfiltered.tsv ${trait}_EAF_unfiltered.tsv
 
 # filter p>0.05 
-awk -F"\t" 'NR==1; NR>1 && $10 !~ /NA/ && $10<=0.05{print $0}' ${trait}_unfiltered.tsv > ${trait}_pval.tsv
+awk -F"\t" 'NR==1; NR>1 && $10 !~ /NA/ && $10<=0.05{print $0}' ${trait}_unfiltered.tsv > ${trait}_pval.tsv # adjust file names if conducted EAF filtering
 
 # create .bed format file of filtered and unfiltered data for liftover tool
 awk -F"\t" 'NR>1{print "chr"$2"\t"$3"\t"$3"\t"$1}' ${trait}_pval.tsv > ${trait}_pval.bed 

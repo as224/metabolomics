@@ -1,6 +1,8 @@
 import gzip
 import sys
 
+# alternative to filtering with awk
+
 def process_file(file_path, output_file):
     count = 0
     try:
