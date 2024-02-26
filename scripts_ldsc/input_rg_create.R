@@ -1,4 +1,6 @@
 # This script creates a input_rg.txt file in order to be able to use ldsc-network-plot
+library(stringr)
+
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 folder_path = "../output_ld_regression"
 
@@ -43,9 +45,17 @@ trait_category_mapping <- c("IL" = "Cytokine",
                             "CRP" = "Protein")
 
 # map the categories to the traits 
+df_adjusted$p1_helper <- df_adjusted$p1
+df_adjusted$p2_helper <- df_adjusted$p2
+
+df_adjusted$p1_helper <- sapply(str_split(df_adjusted$p1_helper, "_"), function(x) x[[2]])
+df_adjusted$p2_helper <- sapply(str_split(df_adjusted$p2_helper, "_"), function(x) x[[2]])
+
+
 for (key in names(trait_category_mapping)) {
-  indices_p1 <- grepl(paste0("^", key), df_adjusted$p1)
-  indices_p2 <- grepl(paste0("^", key), df_adjusted$p2)
+  
+  indices_p1 <- grepl(paste0("^", key), df_adjusted$p1_helper)
+  indices_p2 <- grepl(paste0("^", key), df_adjusted$p2_helper)
   
   df_adjusted$p1_category[indices_p1] <- trait_category_mapping[key]
   df_adjusted$p2_category[indices_p2] <- trait_category_mapping[key]

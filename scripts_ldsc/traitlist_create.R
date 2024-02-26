@@ -1,4 +1,6 @@
 # This script creates the traitlist.txt file as input for ldsc-network-plot
+library(stringr)
+
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 folder_path = "../output_ld_regression"
 df_pre_trait <- read.table(paste(folder_path, "/complete_df_adjusted.tsv", sep=""), header=TRUE)
@@ -15,6 +17,9 @@ df_trait <- data.frame(
 
 # Assign trait values
 df_trait$TRAIT <- unique_p1_id
+
+df_trait$trait_helper <- df_trait$TRAIT
+df_trait$trait_helper <- sapply(str_split(df_trait$trait_helper, "_"), function(x) x[[2]])
 
 # Create a lookup table for mapping TRAIT to CATEGORY
 trait_category_mapping <- c("IL" = "Cytokine",
@@ -52,7 +57,7 @@ trait_category_mapping <- c("IL" = "Cytokine",
 
 for (key in names(trait_category_mapping)) {
   # Find indices where TRAIT starts with the key
-  indices <- grepl(paste0("^", key), df_trait$TRAIT)
+  indices <- grepl(paste0("^", key), df_trait$trait_helper)
   
   # Update CATEGORY with corresponding category from trait_category_mapping
   df_trait$CATEGORY[indices] <- trait_category_mapping[key]
@@ -65,6 +70,9 @@ df_trait$COLOR <- ifelse(startsWith(df_trait$CATEGORY, "Cytokine"), "coral",
                                 ifelse(startsWith(df_trait$CATEGORY, "Autoimmune"), "lightblue", 
                                        ifelse(startsWith(df_trait$CATEGORY, "Inflammatory"), "violet",
                                               "darkblue"))))
+
+df_trait <- subset(df_trait, select = c("CATEGORY", "TRAIT", "COLOR"))
+
 
 write.table(df_trait, file = paste(folder_path, "/traitlist.txt", sep="") ,sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
