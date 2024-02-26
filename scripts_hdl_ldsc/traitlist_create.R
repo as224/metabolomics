@@ -1,7 +1,10 @@
-# This script creates the traitlist.txt file as input for ldsc-network-plot
+# This script creates the traitlist.txt file as input for ldsc-network-plot (for ldsc and hdl)
 library(stringr)
 
+# Set working directory 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+# The traitlist for hdl and ldsc is the same. Here I take the unique IDs from ldsc output but one can also take that from hdl output.
 folder_path = "../output_ld_regression"
 df_pre_trait <- read.table(paste(folder_path, "/complete_df_adjusted.tsv", sep=""), header=TRUE)
 
@@ -53,7 +56,25 @@ trait_category_mapping <- c("IL" = "Cytokine",
                             "C3" = "Protein",
                             "HGF" = "Protein",
                             "MCP1" = "Protein",
-                            "CRP" = "Protein")
+                            "CRP" = "Protein",
+                            "APH"  = "Autoimmune",
+                            "tryptophan" = "Aminoacid",
+                            "histidine" = "Aminoacid",
+                            "phenylalanine" = "Aminoacid",
+                            "isoleucine" = "Aminoacid",
+                            "threonine" = "Aminoacid",
+                            "tyrosine" = "Aminoacid",
+                            "arginine" = "Aminoacid",
+                            "proline" = "Aminoacid",
+                            "acetylcarnitine" = "Other",
+                            "glutamate" = "Aminoacid",
+                            "alanine" = "Aminoacid",
+                            "asparagine" = "Aminoacid",
+                            "cholesterol" = "Other",
+                            "pyruvate" = "Other",
+                            "citrate" = "Other",
+                            "urea" = "Other",
+                            "glycerol" = "Other")
 
 for (key in names(trait_category_mapping)) {
   # Find indices where TRAIT starts with the key
@@ -69,7 +90,8 @@ df_trait$COLOR <- ifelse(startsWith(df_trait$CATEGORY, "Cytokine"), "coral",
                          ifelse(startsWith(df_trait$CATEGORY, "Protein"), "lightgreen", 
                                 ifelse(startsWith(df_trait$CATEGORY, "Autoimmune"), "lightblue", 
                                        ifelse(startsWith(df_trait$CATEGORY, "Inflammatory"), "violet",
-                                              "darkblue"))))
+                                              ifelse(startsWith(df_trait$CATEGORY, "Aminoacid"), "lightpink",
+                                                     "aquamarine")))))
 
 df_trait <- subset(df_trait, select = c("CATEGORY", "TRAIT", "COLOR"))
 
