@@ -33,7 +33,7 @@ for (i in seq_along(matches_list)) {
 }
 
 result_list_clean <- gsub("pmid|\\.tsv\\.gz", "", result_list)
-result_str <- paste(result_list_clean, collapse = ", ")
+result_str <- paste(result_list_clean, collapse = "\n")
 
 result_df <- as.data.frame(result_str)
 
