@@ -12,7 +12,7 @@ folder_path_hdl = "../output_hdl"
 df_ldsc <- read.table(paste(folder_path_ldsc, "/df_all_adjusted_significant_ldsc.tsv", sep=""), header=TRUE)
 df_ldsc <- subset(df_ldsc, select = -c(p1 , p2))
 
-df_hdl <- read.table(paste(folder_path_hdl, "/df_all_adjusted_significant_hdll.tsv", sep=""), header=TRUE)
+df_hdl <- read.table(paste(folder_path_hdl, "/df_all_adjusted_significant_hdl.tsv", sep=""), header=TRUE)
 df_hdl <- subset(df_hdl, select = -c(p1 , p2))
 
 # Adjust column names 
