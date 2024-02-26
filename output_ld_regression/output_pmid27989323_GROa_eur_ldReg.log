@@ -1,0 +1,2044 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 1.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--ref-ld-chr ../input_files/eur_w_ld_chr/ \
+--out ../output_ld_regression/output_pmid27989323_GROa_eur_ldReg \
+--rg ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz,../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz,../output_sumstats/output_pmid21833088_MS_eur.sumstats.gz,../output_sumstats/output_pmid24076602_MS_eur.sumstats.gz,../output_sumstats/output_pmid24816252_acetylcarnitine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_alanine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_arginine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_asparagine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_cholesterol_eur.sumstats.gz,../output_sumstats/output_pmid24816252_citrate_eur.sumstats.gz,../output_sumstats/output_pmid24816252_glutamate_eur.sumstats.gz,../output_sumstats/output_pmid24816252_glycerol_eur.sumstats.gz,../output_sumstats/output_pmid24816252_histidine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_isoleucine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_phenylalanine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_proline_eur.sumstats.gz,../output_sumstats/output_pmid24816252_pyruvate_eur.sumstats.gz,../output_sumstats/output_pmid24816252_threonine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_tryptophan_eur.sumstats.gz,../output_sumstats/output_pmid24816252_tyrosine_eur.sumstats.gz,../output_sumstats/output_pmid24816252_urea_eur.sumstats.gz,../output_sumstats/output_pmid27386562_MS_eur.sumstats.gz,../output_sumstats/output_pmid27455348_ALS_eur.sumstats.gz,../output_sumstats/output_pmid27989323_CTACK_eur.sumstats.gz,../output_sumstats/output_pmid27989323_GCSF_eur.sumstats.gz,../output_sumstats/output_pmid27989323_HGF_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IFNg_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL10_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL12p70_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL13_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL16_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL17_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL18_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL1ra_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL2_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL2ra_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL4_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL5_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL6_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL7_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL8_eur.sumstats.gz,../output_sumstats/output_pmid27989323_IL9_eur.sumstats.gz,../output_sumstats/output_pmid27989323_MCP1_eur.sumstats.gz,../output_sumstats/output_pmid27989323_MCP3_eur.sumstats.gz,../output_sumstats/output_pmid27989323_MCSF_eur.sumstats.gz,../output_sumstats/output_pmid27989323_MIF_eur.sumstats.gz,../output_sumstats/output_pmid27989323_MIG_eur.sumstats.gz,../output_sumstats/output_pmid27989323_MIP1a_eur.sumstats.gz,../output_sumstats/output_pmid27989323_MIP1b_eur.sumstats.gz,../output_sumstats/output_pmid27989323_PDGFbb_eur.sumstats.gz,../output_sumstats/output_pmid27989323_RANTES_eur.sumstats.gz,../output_sumstats/output_pmid27989323_SCF_eur.sumstats.gz,../output_sumstats/output_pmid27989323_SCGFb_eur.sumstats.gz,../output_sumstats/output_pmid27989323_SDF1_eur.sumstats.gz,../output_sumstats/output_pmid27989323_TNFa_eur.sumstats.gz,../output_sumstats/output_pmid27989323_TNFb_eur.sumstats.gz,../output_sumstats/output_pmid27989323_TRAIL_eur.sumstats.gz,../output_sumstats/output_pmid27989323_bNGF_eur.sumstats.gz,../output_sumstats/output_pmid27989323_eotaxin_eur.sumstats.gz,../output_sumstats/output_pmid27989323_ip10_eur.sumstats.gz,../output_sumstats/output_pmid29566793_ALS_eur.sumstats.gz,../output_sumstats/output_pmid29632382_T2d-BMIadj_eur.sumstats.gz,../output_sumstats/output_pmid30054458_T2d_eur.sumstats.gz,../output_sumstats/output_pmid33111402_PD_eur.sumstats.gz,../output_sumstats/output_pmid33310728_RA_eur.sumstats.gz,../output_sumstats/output_pmid33589841_LBD_eur.sumstats.gz,../output_sumstats/output_pmid33987465_PD_eur.sumstats.gz,../output_sumstats/output_pmid34737426_APH_eur.sumstats.gz \
+--w-ld-chr ../input_files/eur_w_ld_chr/ 
+
+Beginning analysis at Sat Feb 24 09:00:04 2024
+Reading summary statistics from ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz ...
+Read summary statistics for 63 SNPs.
+Reading reference panel LD Score from ../input_files/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from ../input_files/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 63 SNPs remain.
+After merging with regression SNP LD, 63 SNPs remain.
+Computing rg for phenotype 2/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: -45.2997 (20.7723)
+Lambda GC: 0.3141
+Mean Chi^2: 0.4167
+Intercept: 1.381 (0.479)
+Ratio: NA (mean chi^2 < 1)
+
+Heritability of phenotype 2/68
+------------------------------
+Total Observed scale h2: -45.2997 (20.7723)
+Lambda GC: 0.3141
+Mean Chi^2: 0.4167
+Intercept: 1.381 (0.479)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -45.2032 (20.6759)
+Mean z1*z2: 0.4167
+Intercept: 1.3794 (0.4774)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 3/68
+Reading summary statistics from ../output_sumstats/output_pmid21833088_MS_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+19 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 3/68
+------------------------------
+Total Observed scale h2: -0.5799 (4.211)
+Lambda GC: 1.0225
+Mean Chi^2: 1.0668
+Intercept: 1.1497 (0.7416)
+Ratio: 2.2424 (11.1056)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -1.2141 (5.4889)
+Mean z1*z2: 0.0226
+Intercept: 0.0855 (0.4314)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 4/68
+Reading summary statistics from ../output_sumstats/output_pmid24076602_MS_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+3 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 4/68
+------------------------------
+Total Observed scale h2: -2.2439 (2.0937)
+Lambda GC: 0.0556
+Mean Chi^2: 0.1542
+Intercept: 0.8249 (0.7482)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -10.4775 (7.4409)
+Mean z1*z2: 0.1869
+Intercept: 1.1309 (0.8014)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 5/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_acetylcarnitine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 5/68
+------------------------------
+Total Observed scale h2: 4.2123 (35.2968)
+Lambda GC: 1.0864
+Mean Chi^2: 2.2545
+Intercept: 2.0961 (1.675)
+Ratio: 0.8737 (1.3351)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 17.0999 (27.2068)
+Mean z1*z2: -0.0956
+Intercept: -0.6439 (0.9734)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 6/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_alanine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 6/68
+------------------------------
+Total Observed scale h2: 1.3745 (12.1024)
+Lambda GC: 1.2365
+Mean Chi^2: 0.8583
+Intercept: 0.7746 (0.5805)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -14.8451 (11.1842)
+Mean z1*z2: 0.32
+Intercept: 0.7943 (0.3894)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 7/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_arginine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 7/68
+------------------------------
+Total Observed scale h2: -11.0089 (22.0871)
+Lambda GC: 1.2234
+Mean Chi^2: 0.9332
+Intercept: 1.3599 (1.0887)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -22.1975 (17.9799)
+Mean z1*z2: -0.1467
+Intercept: 0.5265 (0.612)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 8/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_asparagine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 8/68
+------------------------------
+Total Observed scale h2: -10.8718 (15.7275)
+Lambda GC: 2.6939
+Mean Chi^2: 1.488
+Intercept: 2.0002 (0.6667)
+Ratio: 2.0499 (1.3664)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -60.9421 (16.6134)
+Mean z1*z2: 0.2975
+Intercept: 2.2038 (0.558)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 9/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_cholesterol_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 9/68
+------------------------------
+Total Observed scale h2: 0.0118 (20.8649)
+Lambda GC: 1.2398
+Mean Chi^2: 1.0972
+Intercept: 1.1197 (0.9874)
+Ratio: 1.2319 (10.1605)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 17.5282 (29.6885)
+Mean z1*z2: -0.2581
+Intercept: -0.8126 (1.0058)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 10/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_citrate_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 10/68
+-------------------------------
+Total Observed scale h2: -11.1146 (32.8664)
+Lambda GC: 1.641
+Mean Chi^2: 1.346
+Intercept: 1.8061 (1.5771)
+Ratio: 2.3301 (4.5587)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -28.6112 (46.8125)
+Mean z1*z2: 0.2796
+Intercept: 1.1885 (1.573)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 11/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_glutamate_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 11/68
+-------------------------------
+Total Observed scale h2: -32.3719 (33.1675)
+Lambda GC: 0.1723
+Mean Chi^2: 0.3786
+Intercept: 1.8147 (1.6301)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 19.3697 (24.6599)
+Mean z1*z2: -0.0659
+Intercept: -0.6631 (0.8646)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 12/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_glycerol_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 12/68
+-------------------------------
+Total Observed scale h2: -18.6037 (41.0523)
+Lambda GC: 3.1497
+Mean Chi^2: 2.3783
+Intercept: 3.0254 (2.0188)
+Ratio: 1.4695 (1.4647)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 26.4303 (23.0997)
+Mean z1*z2: -0.0856
+Intercept: -0.9132 (0.825)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 13/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_histidine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 13/68
+-------------------------------
+Total Observed scale h2: 0.4232 (10.1788)
+Lambda GC: 0.9986
+Mean Chi^2: 0.8434
+Intercept: 0.8491 (0.4754)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -34.3693 (7.7352)
+Mean z1*z2: 0.3466
+Intercept: 1.4283 (0.2858)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 14/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_isoleucine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 14/68
+-------------------------------
+Total Observed scale h2: 1.723 (13.2054)
+Lambda GC: 1.9965
+Mean Chi^2: 0.9663
+Intercept: 0.9158 (0.6675)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.4034 (25.6739)
+Mean z1*z2: 0.3531
+Intercept: 0.3799 (0.8705)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 15/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_phenylalanine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 15/68
+-------------------------------
+Total Observed scale h2: 7.7009 (8.8183)
+Lambda GC: 0.5365
+Mean Chi^2: 0.6685
+Intercept: 0.3294 (0.3567)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 5.6817 (16.8438)
+Mean z1*z2: 0.2906
+Intercept: 0.1284 (0.5562)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 16/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_proline_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 16/68
+-------------------------------
+Total Observed scale h2: 2.3244 (5.0831)
+Lambda GC: 0.5496
+Mean Chi^2: 0.5815
+Intercept: 0.4907 (0.2062)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 7.8093 (24.4229)
+Mean z1*z2: 0.109
+Intercept: -0.1369 (0.8198)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 17/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_pyruvate_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 17/68
+-------------------------------
+Total Observed scale h2: -16.699 (28.8278)
+Lambda GC: 1.5622
+Mean Chi^2: 1.6109
+Intercept: 2.2463 (1.3909)
+Ratio: 2.0401 (2.2769)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.8481 (29.093)
+Mean z1*z2: 0.3139
+Intercept: 0.3056 (1.0049)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 18/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_threonine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 18/68
+-------------------------------
+Total Observed scale h2: -6.8903 (5.8916)
+Lambda GC: 1.8809
+Mean Chi^2: 0.9277
+Intercept: 1.1454 (0.1572)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -49.0303 (11.8107)
+Mean z1*z2: 0.1107
+Intercept: 1.459 (0.381)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 19/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_tryptophan_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 19/68
+-------------------------------
+Total Observed scale h2: -2.842 (14.977)
+Lambda GC: 0.7192
+Mean Chi^2: 0.9469
+Intercept: 1.0878 (0.7177)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -12.6829 (26.4598)
+Mean z1*z2: 0.1001
+Intercept: 0.495 (0.9005)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 20/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_tyrosine_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 20/68
+-------------------------------
+Total Observed scale h2: -27.4516 (31.7793)
+Lambda GC: 0.5496
+Mean Chi^2: 0.7584
+Intercept: 2.0011 (1.5412)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 36.9467 (46.1984)
+Mean z1*z2: -0.0213
+Intercept: -1.1768 (1.5583)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 21/68
+Reading summary statistics from ../output_sumstats/output_pmid24816252_urea_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+35 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 21/68
+-------------------------------
+Total Observed scale h2: 2.8265 (4.5689)
+Lambda GC: 0.3275
+Mean Chi^2: 0.4219
+Intercept: 0.2737 (0.1971)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -4.8358 (11.1436)
+Mean z1*z2: 0.101
+Intercept: 0.2615 (0.3843)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 22/68
+Reading summary statistics from ../output_sumstats/output_pmid27386562_MS_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+45 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 22/68
+-------------------------------
+Total Observed scale h2: -2.167 (5.3669)
+Lambda GC: 0.8836
+Mean Chi^2: 0.599
+Intercept: 0.8168 (0.5707)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -5.6379 (17.8773)
+Mean z1*z2: -0.135
+Intercept: 0.1366 (0.9157)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 23/68
+Reading summary statistics from ../output_sumstats/output_pmid27455348_ALS_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 23/68
+-------------------------------
+Total Observed scale h2: 1.9809 (1.8856)
+Lambda GC: 1.4387
+Mean Chi^2: 0.986
+Intercept: 0.5391 (0.3965)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -6.8175 (7.7151)
+Mean z1*z2: -0.0247
+Intercept: 0.4373 (0.5571)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 24/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_CTACK_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 24/68
+-------------------------------
+Total Observed scale h2: 4.3329 (8.9215)
+Lambda GC: 0.496
+Mean Chi^2: 0.5126
+Intercept: 0.4184 (0.2015)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -8.1054 (8.7288)
+Mean z1*z2: 0.057
+Intercept: 0.2318 (0.208)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 25/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_GCSF_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 25/68
+-------------------------------
+Total Observed scale h2: 17.4543 (8.1946)
+Lambda GC: 1.0988
+Mean Chi^2: 1.2559
+Intercept: 0.4233 (0.2835)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -14.1154 (8.9497)
+Mean z1*z2: 0.1445
+Intercept: 0.5943 (0.3179)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 26/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_HGF_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 26/68
+-------------------------------
+Total Observed scale h2: -0.7868 (6.4148)
+Lambda GC: 0.856
+Mean Chi^2: 0.733
+Intercept: 0.7727 (0.3331)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -16.5806 (13.1845)
+Mean z1*z2: 0.2027
+Intercept: 0.7465 (0.4642)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 27/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IFNg_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 27/68
+-------------------------------
+Total Observed scale h2: 62.5457 (11.6761)
+Lambda GC: 5.2067
+Mean Chi^2: 3.0685
+Intercept: 0.1575 (0.3479)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -12.2687 (13.1696)
+Mean z1*z2: 0.0102
+Intercept: 0.3958 (0.4387)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 28/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL10_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+62 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 28/68
+-------------------------------
+Total Observed scale h2: 11.3461 (9.7667)
+Lambda GC: 0.9405
+Mean Chi^2: 1.2327
+Intercept: 0.6999 (0.3728)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -20.5989 (9.8985)
+Mean z1*z2: 0.1431
+Intercept: 0.7901 (0.328)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 29/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL12p70_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 29/68
+-------------------------------
+Total Observed scale h2: 6.514 (9.4645)
+Lambda GC: 0.7192
+Mean Chi^2: 1.1469
+Intercept: 0.8188 (0.44)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -24.747 (13.1216)
+Mean z1*z2: 0.1373
+Intercept: 0.9462 (0.4603)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 30/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL13_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 30/68
+-------------------------------
+Total Observed scale h2: 8.1046 (26.243)
+Lambda GC: 0.8615
+Mean Chi^2: 0.8431
+Intercept: 0.6655 (0.6101)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -21.286 (18.8123)
+Mean z1*z2: 0.2044
+Intercept: 0.6608 (0.4395)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 31/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL16_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 31/68
+-------------------------------
+Total Observed scale h2: -22.6922 (31.0094)
+Lambda GC: 1.2731
+Mean Chi^2: 0.7753
+Intercept: 1.2554 (0.7229)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -11.1298 (10.8422)
+Mean z1*z2: 0.1323
+Intercept: 0.3688 (0.2736)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 32/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL17_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 32/68
+-------------------------------
+Total Observed scale h2: 2.0804 (6.8951)
+Lambda GC: 0.665
+Mean Chi^2: 0.6955
+Intercept: 0.5982 (0.327)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -13.7198 (13.7445)
+Mean z1*z2: 0.0837
+Intercept: 0.5172 (0.4662)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 33/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL18_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 33/68
+-------------------------------
+Total Observed scale h2: 13.4118 (10.2044)
+Lambda GC: 0.7887
+Mean Chi^2: 0.7229
+Intercept: 0.4342 (0.2199)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 6.3094 (8.517)
+Mean z1*z2: 0.0359
+Intercept: -0.101 (0.1956)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 34/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL1ra_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 34/68
+-------------------------------
+Total Observed scale h2: -1.9967 (29.7496)
+Lambda GC: 0.6082
+Mean Chi^2: 1.1099
+Intercept: 1.1541 (0.6775)
+Ratio: 1.4013 (6.1621)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -32.4552 (26.141)
+Mean z1*z2: 0.2823
+Intercept: 0.9869 (0.6103)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 35/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL2_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+62 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 35/68
+-------------------------------
+Total Observed scale h2: -11.4112 (21.41)
+Lambda GC: 1.6252
+Mean Chi^2: 1.1414
+Intercept: 1.3811 (0.4632)
+Ratio: 2.6947 (3.2757)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -34.8981 (25.0677)
+Mean z1*z2: 0.3113
+Intercept: 1.0477 (0.5712)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 36/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL2ra_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 36/68
+-------------------------------
+Total Observed scale h2: 4.7953 (14.5373)
+Lambda GC: 1.3203
+Mean Chi^2: 1.0436
+Intercept: 0.9384 (0.2992)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -4.9716 (24.8467)
+Mean z1*z2: 0.0891
+Intercept: 0.1968 (0.5904)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 37/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL4_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 37/68
+-------------------------------
+Total Observed scale h2: 24.2586 (8.1316)
+Lambda GC: 1.1082
+Mean Chi^2: 1.3948
+Intercept: 0.2239 (0.2323)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -11.642 (6.0465)
+Mean z1*z2: 0.1227
+Intercept: 0.499 (0.2069)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 38/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL5_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 38/68
+-------------------------------
+Total Observed scale h2: 20.4952 (14.0598)
+Lambda GC: 1.1333
+Mean Chi^2: 0.9043
+Intercept: 0.4884 (0.3474)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -14.1155 (14.6688)
+Mean z1*z2: 0.2124
+Intercept: 0.5066 (0.337)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 39/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL6_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 39/68
+-------------------------------
+Total Observed scale h2: 16.0165 (7.035)
+Lambda GC: 1.4637
+Mean Chi^2: 1.133
+Intercept: 0.3471 (0.2999)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -20.9013 (11.5092)
+Mean z1*z2: 0.0948
+Intercept: 0.7743 (0.4009)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 40/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL7_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 40/68
+-------------------------------
+Total Observed scale h2: 92.1044 (35.1318)
+Lambda GC: 1.6754
+Mean Chi^2: 2.2144
+Intercept: 0.283 (0.6461)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -3.3342 (30.3781)
+Mean z1*z2: 0.2146
+Intercept: 0.2846 (0.6826)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 41/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL8_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 41/68
+-------------------------------
+Total Observed scale h2: -7.5863 (33.7872)
+Lambda GC: 0.8153
+Mean Chi^2: 1.3582
+Intercept: 1.5207 (0.7124)
+Ratio: 1.4536 (1.9888)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -47.8214 (23.2154)
+Mean z1*z2: 0.3526
+Intercept: 1.3744 (0.5288)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 42/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_IL9_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+62 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 42/68
+-------------------------------
+Total Observed scale h2: 10.7163 (18.8809)
+Lambda GC: 0.2968
+Mean Chi^2: 0.7934
+Intercept: 0.5583 (0.4288)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 1.1873 (10.7045)
+Mean z1*z2: 0.1094
+Intercept: 0.0845 (0.2593)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 43/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_MCP1_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 43/68
+-------------------------------
+Total Observed scale h2: 3.0391 (10.907)
+Lambda GC: 1.3306
+Mean Chi^2: 1.3227
+Intercept: 1.1774 (0.6668)
+Ratio: 0.5497 (2.0663)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -17.3497 (9.5514)
+Mean z1*z2: 0.2617
+Intercept: 0.8298 (0.3814)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 44/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_MCP3_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+61 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 44/68
+-------------------------------
+Total Observed scale h2: 131.0733 (139.4001)
+Lambda GC: 0.5785
+Mean Chi^2: 1.0248
+Intercept: 0.3482 (0.6681)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -40.0643 (56.7939)
+Mean z1*z2: 0.1348
+Intercept: 0.5543 (0.6377)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 45/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_MCSF_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 45/68
+-------------------------------
+Total Observed scale h2: -41.7713 (156.9472)
+Lambda GC: 0.856
+Mean Chi^2: 0.8701
+Intercept: 1.0832 (0.9155)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -20.4944 (34.8523)
+Mean z1*z2: 0.0121
+Intercept: 0.2257 (0.4233)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 46/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_MIF_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 46/68
+-------------------------------
+Total Observed scale h2: -40.8435 (28.3026)
+Lambda GC: 0.2018
+Mean Chi^2: 0.6336
+Intercept: 1.5003 (0.6833)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -27.1903 (12.8446)
+Mean z1*z2: 0.2718
+Intercept: 0.8493 (0.3276)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 47/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_MIG_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 47/68
+-------------------------------
+Total Observed scale h2: -56.3866 (42.3463)
+Lambda GC: 1.2498
+Mean Chi^2: 0.8995
+Intercept: 2.1615 (1.0274)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 1.1253 (21.2327)
+Mean z1*z2: 0.1031
+Intercept: 0.0784 (0.5263)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 48/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_MIP1a_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 48/68
+-------------------------------
+Total Observed scale h2: 28.2963 (14.1667)
+Lambda GC: 1.0016
+Mean Chi^2: 0.7988
+Intercept: 0.1852 (0.2669)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -15.6382 (10.974)
+Mean z1*z2: 0.193
+Intercept: 0.5265 (0.2501)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 49/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_MIP1b_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+62 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 49/68
+-------------------------------
+Total Observed scale h2: -28.1741 (33.7491)
+Lambda GC: 1.8071
+Mean Chi^2: 2.1471
+Intercept: 3.5751 (1.8181)
+Ratio: 2.2449 (1.585)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -40.0932 (34.865)
+Mean z1*z2: 0.1748
+Intercept: 1.5008 (1.2395)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 50/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_PDGFbb_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 50/68
+-------------------------------
+Total Observed scale h2: 25.2185 (6.5937)
+Lambda GC: 1.0802
+Mean Chi^2: 1.2669
+Intercept: -0.0065 (0.2167)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -6.3053 (6.1919)
+Mean z1*z2: 0.1946
+Intercept: 0.402 (0.2053)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 51/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_RANTES_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 51/68
+-------------------------------
+Total Observed scale h2: -54.4661 (42.6067)
+Lambda GC: 0.5474
+Mean Chi^2: 0.6499
+Intercept: 1.7815 (0.9993)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 5.1764 (23.5517)
+Mean z1*z2: -0.0186
+Intercept: -0.1275 (0.5345)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 52/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_SCF_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 52/68
+-------------------------------
+Total Observed scale h2: 1.7312 (9.7438)
+Lambda GC: 2.5121
+Mean Chi^2: 1.2778
+Intercept: 1.1905 (0.5261)
+Ratio: 0.6857 (1.8936)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -16.4478 (18.7276)
+Mean z1*z2: -0.1431
+Intercept: 0.3937 (0.6616)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 53/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_SCGFb_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+61 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 53/68
+-------------------------------
+Total Observed scale h2: -30.2136 (25.536)
+Lambda GC: 0.5452
+Mean Chi^2: 0.5422
+Intercept: 1.2192 (0.6152)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 4.6671 (34.806)
+Mean z1*z2: -0.0028
+Intercept: -0.1049 (0.8207)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 54/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_SDF1_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 54/68
+-------------------------------
+Total Observed scale h2: 4.2562 (10.5406)
+Lambda GC: 1.0618
+Mean Chi^2: 0.8059
+Intercept: 0.6531 (0.4056)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 6.7196 (9.7769)
+Mean z1*z2: -0.0495
+Intercept: -0.2364 (0.2913)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 55/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_TNFa_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 55/68
+-------------------------------
+Total Observed scale h2: -2.5436 (12.7361)
+Lambda GC: 0.4551
+Mean Chi^2: 0.544
+Intercept: 0.5974 (0.2816)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 7.1464 (22.3792)
+Mean z1*z2: 0.0536
+Intercept: -0.0974 (0.516)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 56/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_TNFb_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+53 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 56/68
+-------------------------------
+Total Observed scale h2: 37.3282 (26.5484)
+Lambda GC: 0.867
+Mean Chi^2: 0.7637
+Intercept: 0.4039 (0.2432)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -14.179 (27.9005)
+Mean z1*z2: -0.0685
+Intercept: 0.1364 (0.4334)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 57/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_TRAIL_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 57/68
+-------------------------------
+Total Observed scale h2: -8.8704 (22.3538)
+Lambda GC: 1.6792
+Mean Chi^2: 1.4361
+Intercept: 1.8771 (1.2087)
+Ratio: 2.0113 (2.7716)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 4.0978 (16.5715)
+Mean z1*z2: -0.063
+Intercept: -0.1961 (0.5976)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 58/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_bNGF_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 58/68
+-------------------------------
+Total Observed scale h2: -27.3613 (19.9449)
+Lambda GC: 0.3395
+Mean Chi^2: 0.5946
+Intercept: 1.1814 (0.4981)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.7158 (11.4165)
+Mean z1*z2: -0.0382
+Intercept: -0.0535 (0.3071)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 59/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_eotaxin_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 59/68
+-------------------------------
+Total Observed scale h2: 35.9071 (10.7946)
+Lambda GC: 2.1983
+Mean Chi^2: 1.9918
+Intercept: 0.1869 (0.3177)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -11.7268 (12.7391)
+Mean z1*z2: 0.1282
+Intercept: 0.5101 (0.4491)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 60/68
+Reading summary statistics from ../output_sumstats/output_pmid27989323_ip10_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+63 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 60/68
+-------------------------------
+Total Observed scale h2: 39.4713 (35.5294)
+Lambda GC: 0.3713
+Mean Chi^2: 1.6009
+Intercept: 0.7114 (0.634)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -3.5015 (14.2513)
+Mean z1*z2: 0.1965
+Intercept: 0.2722 (0.341)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 61/68
+Reading summary statistics from ../output_sumstats/output_pmid29566793_ALS_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+62 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 61/68
+-------------------------------
+Total Observed scale h2: 0.8643 (0.9324)
+Lambda GC: 1.9156
+Mean Chi^2: 1.0659
+Intercept: 0.6229 (0.4508)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -3.9068 (6.7467)
+Mean z1*z2: -0.0643
+Intercept: 0.3275 (0.7203)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 62/68
+Reading summary statistics from ../output_sumstats/output_pmid29632382_T2d-BMIadj_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+3 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+ERROR computing rg for phenotype 62/68, from file ../output_sumstats/output_pmid29632382_T2d-BMIadj_eur.sumstats.gz.
+Traceback (most recent call last):
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/sumstats.py", line 410, in estimate_rg
+    rghat = _rg(loop, args, log, M_annot, ref_ld_cnames, w_ld_cname, i)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/sumstats.py", line 539, in _rg
+    intercept_gencov=intercepts[2], n_blocks=n_blocks, twostep=args.two_step)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 693, in __init__
+    twostep=twostep)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 555, in __init__
+    intercept=intercept_gencov, slow=slow, step1_ii=step1_ii)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 213, in __init__
+    x, yp, update_func, n_blocks, slow=slow, w=initial_w)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/irwls.py", line 66, in __init__
+    x, y, update_func, n_blocks, w, slow=slow, separators=separators)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/irwls.py", line 111, in irwls
+    w = np.sqrt(w)
+FloatingPointError: invalid value encountered in sqrt
+
+
+Computing rg for phenotype 63/68
+Reading summary statistics from ../output_sumstats/output_pmid30054458_T2d_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+2 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+ERROR computing rg for phenotype 63/68, from file ../output_sumstats/output_pmid30054458_T2d_eur.sumstats.gz.
+Traceback (most recent call last):
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/sumstats.py", line 410, in estimate_rg
+    rghat = _rg(loop, args, log, M_annot, ref_ld_cnames, w_ld_cname, i)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/sumstats.py", line 539, in _rg
+    intercept_gencov=intercepts[2], n_blocks=n_blocks, twostep=args.two_step)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 690, in __init__
+    slow=slow, twostep=twostep)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 346, in __init__
+    slow=slow, step1_ii=step1_ii, old_weights=old_weights)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 213, in __init__
+    x, yp, update_func, n_blocks, slow=slow, w=initial_w)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/irwls.py", line 66, in __init__
+    x, y, update_func, n_blocks, w, slow=slow, separators=separators)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/irwls.py", line 127, in irwls
+    x, y, n_blocks, separators=separators)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/jackknife.py", line 310, in __init__
+    self.delete_values = self.block_values_to_delete_values(xty, xtx)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/jackknife.py", line 424, in block_values_to_delete_values
+    delete_xtx, delete_xty).reshape((1, p))
+  File "/Users/as/miniforge3/envs/ldsc/lib/python2.7/site-packages/numpy/linalg/linalg.py", line 403, in solve
+    r = gufunc(a, b, signature=signature, extobj=extobj)
+  File "/Users/as/miniforge3/envs/ldsc/lib/python2.7/site-packages/numpy/linalg/linalg.py", line 97, in _raise_linalgerror_singular
+    raise LinAlgError("Singular matrix")
+LinAlgError: Singular matrix
+
+
+Computing rg for phenotype 64/68
+Reading summary statistics from ../output_sumstats/output_pmid33111402_PD_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+1 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+ERROR computing rg for phenotype 64/68, from file ../output_sumstats/output_pmid33111402_PD_eur.sumstats.gz.
+Traceback (most recent call last):
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/sumstats.py", line 410, in estimate_rg
+    rghat = _rg(loop, args, log, M_annot, ref_ld_cnames, w_ld_cname, i)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/sumstats.py", line 539, in _rg
+    intercept_gencov=intercepts[2], n_blocks=n_blocks, twostep=args.two_step)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 688, in __init__
+    slow=slow, twostep=twostep)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 346, in __init__
+    slow=slow, step1_ii=step1_ii, old_weights=old_weights)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/regressions.py", line 213, in __init__
+    x, yp, update_func, n_blocks, slow=slow, w=initial_w)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/irwls.py", line 58, in __init__
+    n, p = jk._check_shape(x, y)
+  File "/Users/as/Documents/UNI/Bioinformatik/2023:24_WS/GoBi_Lokal/BlockTeil_Metabolomics/ldsc/ldscore/jackknife.py", line 32, in _check_shape
+    raise ValueError('More dimensions than datapoints.')
+ValueError: More dimensions than datapoints.
+
+
+Computing rg for phenotype 65/68
+Reading summary statistics from ../output_sumstats/output_pmid33310728_RA_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+60 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 65/68
+-------------------------------
+Total Observed scale h2: 1.0151 (0.4114)
+Lambda GC: 1.4494
+Mean Chi^2: 2.3928
+Intercept: 0.5176 (0.4297)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 1.9429 (5.1871)
+Mean z1*z2: 0.197
+Intercept: -0.1715 (1.0583)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 66/68
+Reading summary statistics from ../output_sumstats/output_pmid33589841_LBD_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+56 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 66/68
+-------------------------------
+Total Observed scale h2: 15.203 (5.2366)
+Lambda GC: 1.2686
+Mean Chi^2: 0.8469
+Intercept: 0.2389 (0.1914)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.3745 (6.087)
+Mean z1*z2: 0.1236
+Intercept: 0.1305 (0.2089)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 67/68
+Reading summary statistics from ../output_sumstats/output_pmid33987465_PD_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+62 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 67/68
+-------------------------------
+Total Observed scale h2: -1.7583 (19.7984)
+Lambda GC: 1.0864
+Mean Chi^2: 0.7946
+Intercept: 0.825 (0.3653)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 14.7853 (23.2811)
+Mean z1*z2: -0.1612
+Intercept: -0.4462 (0.4828)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+Computing rg for phenotype 68/68
+Reading summary statistics from ../output_sumstats/output_pmid34737426_APH_eur.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 63 SNPs remain.
+56 SNPs with valid alleles.
+WARNING: number of SNPs less than 200k; this is almost always bad.
+
+Heritability of phenotype 68/68
+-------------------------------
+Total Observed scale h2: -0.1957 (0.1539)
+Lambda GC: 0.5826
+Mean Chi^2: 0.4683
+Intercept: 1.0289 (0.4782)
+Ratio: NA (mean chi^2 < 1)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.8772 (1.2517)
+Mean z1*z2: 0.0082
+Intercept: 0.2279 (0.3443)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (h2  out of bounds) 
+Z-score: nan (nan) (h2  out of bounds)
+P: nan (nan) (h2  out of bounds)
+WARNING: One of the h2's was out of bounds.
+This usually indicates a data-munging error or that h2 or N is low.
+
+
+Summary of Genetic Correlation Results
+                                                          p1                                                                      p2  rg  se   z   p   h2_obs h2_obs_se   h2_int h2_int_se gcov_int gcov_int_se
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz  NA  NA  NA  NA    -45.3     20.77    1.381     0.479    1.379      0.4774
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz               ../output_sumstats/output_pmid21833088_MS_eur.sumstats.gz  NA  NA  NA  NA  -0.5799     4.211     1.15    0.7416  0.08549      0.4314
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz               ../output_sumstats/output_pmid24076602_MS_eur.sumstats.gz  NA  NA  NA  NA   -2.244     2.094   0.8249    0.7482    1.131      0.8014
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz  ../output_sumstats/output_pmid24816252_acetylcarnitine_eur.sumstats.gz  NA  NA  NA  NA    4.212      35.3    2.096     1.675  -0.6439      0.9734
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz          ../output_sumstats/output_pmid24816252_alanine_eur.sumstats.gz  NA  NA  NA  NA    1.374      12.1   0.7746    0.5805   0.7943      0.3894
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz         ../output_sumstats/output_pmid24816252_arginine_eur.sumstats.gz  NA  NA  NA  NA   -11.01     22.09     1.36     1.089   0.5265       0.612
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz       ../output_sumstats/output_pmid24816252_asparagine_eur.sumstats.gz  NA  NA  NA  NA   -10.87     15.73        2    0.6667    2.204       0.558
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz      ../output_sumstats/output_pmid24816252_cholesterol_eur.sumstats.gz  NA  NA  NA  NA  0.01178     20.86     1.12    0.9874  -0.8126       1.006
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz          ../output_sumstats/output_pmid24816252_citrate_eur.sumstats.gz  NA  NA  NA  NA   -11.11     32.87    1.806     1.577    1.189       1.573
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz        ../output_sumstats/output_pmid24816252_glutamate_eur.sumstats.gz  NA  NA  NA  NA   -32.37     33.17    1.815      1.63  -0.6631      0.8646
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz         ../output_sumstats/output_pmid24816252_glycerol_eur.sumstats.gz  NA  NA  NA  NA    -18.6     41.05    3.025     2.019  -0.9132       0.825
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz        ../output_sumstats/output_pmid24816252_histidine_eur.sumstats.gz  NA  NA  NA  NA   0.4232     10.18   0.8491    0.4754    1.428      0.2858
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz       ../output_sumstats/output_pmid24816252_isoleucine_eur.sumstats.gz  NA  NA  NA  NA    1.723     13.21   0.9158    0.6675   0.3799      0.8705
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz    ../output_sumstats/output_pmid24816252_phenylalanine_eur.sumstats.gz  NA  NA  NA  NA    7.701     8.818   0.3294    0.3567   0.1284      0.5562
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz          ../output_sumstats/output_pmid24816252_proline_eur.sumstats.gz  NA  NA  NA  NA    2.324     5.083   0.4907    0.2062  -0.1369      0.8198
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz         ../output_sumstats/output_pmid24816252_pyruvate_eur.sumstats.gz  NA  NA  NA  NA    -16.7     28.83    2.246     1.391   0.3056       1.005
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz        ../output_sumstats/output_pmid24816252_threonine_eur.sumstats.gz  NA  NA  NA  NA    -6.89     5.892    1.145    0.1572    1.459       0.381
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz       ../output_sumstats/output_pmid24816252_tryptophan_eur.sumstats.gz  NA  NA  NA  NA   -2.842     14.98    1.088    0.7177    0.495      0.9005
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz         ../output_sumstats/output_pmid24816252_tyrosine_eur.sumstats.gz  NA  NA  NA  NA   -27.45     31.78    2.001     1.541   -1.177       1.558
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid24816252_urea_eur.sumstats.gz  NA  NA  NA  NA    2.826     4.569   0.2737    0.1971   0.2615      0.3843
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz               ../output_sumstats/output_pmid27386562_MS_eur.sumstats.gz  NA  NA  NA  NA   -2.167     5.367   0.8168    0.5707   0.1366      0.9157
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27455348_ALS_eur.sumstats.gz  NA  NA  NA  NA    1.981     1.886   0.5391    0.3965   0.4373      0.5571
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz            ../output_sumstats/output_pmid27989323_CTACK_eur.sumstats.gz  NA  NA  NA  NA    4.333     8.922   0.4184    0.2015   0.2318       0.208
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_GCSF_eur.sumstats.gz  NA  NA  NA  NA    17.45     8.195   0.4233    0.2835   0.5943      0.3179
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_HGF_eur.sumstats.gz  NA  NA  NA  NA  -0.7868     6.415   0.7727    0.3331   0.7465      0.4642
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_IFNg_eur.sumstats.gz  NA  NA  NA  NA    62.55     11.68   0.1575    0.3479   0.3958      0.4387
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_IL10_eur.sumstats.gz  NA  NA  NA  NA    11.35     9.767   0.6999    0.3728   0.7901       0.328
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz          ../output_sumstats/output_pmid27989323_IL12p70_eur.sumstats.gz  NA  NA  NA  NA    6.514     9.465   0.8188      0.44   0.9462      0.4603
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_IL13_eur.sumstats.gz  NA  NA  NA  NA    8.105     26.24   0.6655    0.6101   0.6608      0.4395
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_IL16_eur.sumstats.gz  NA  NA  NA  NA   -22.69     31.01    1.255    0.7229   0.3688      0.2736
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_IL17_eur.sumstats.gz  NA  NA  NA  NA     2.08     6.895   0.5982     0.327   0.5172      0.4662
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_IL18_eur.sumstats.gz  NA  NA  NA  NA    13.41      10.2   0.4342    0.2199   -0.101      0.1956
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz            ../output_sumstats/output_pmid27989323_IL1ra_eur.sumstats.gz  NA  NA  NA  NA   -1.997     29.75    1.154    0.6775   0.9869      0.6103
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_IL2_eur.sumstats.gz  NA  NA  NA  NA   -11.41     21.41    1.381    0.4632    1.048      0.5712
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz            ../output_sumstats/output_pmid27989323_IL2ra_eur.sumstats.gz  NA  NA  NA  NA    4.795     14.54   0.9384    0.2992   0.1968      0.5904
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_IL4_eur.sumstats.gz  NA  NA  NA  NA    24.26     8.132   0.2239    0.2323    0.499      0.2069
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_IL5_eur.sumstats.gz  NA  NA  NA  NA     20.5     14.06   0.4884    0.3474   0.5066       0.337
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_IL6_eur.sumstats.gz  NA  NA  NA  NA    16.02     7.035   0.3471    0.2999   0.7743      0.4009
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_IL7_eur.sumstats.gz  NA  NA  NA  NA     92.1     35.13    0.283    0.6461   0.2846      0.6826
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_IL8_eur.sumstats.gz  NA  NA  NA  NA   -7.586     33.79    1.521    0.7124    1.374      0.5288
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_IL9_eur.sumstats.gz  NA  NA  NA  NA    10.72     18.88   0.5583    0.4288  0.08453      0.2593
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_MCP1_eur.sumstats.gz  NA  NA  NA  NA    3.039     10.91    1.177    0.6668   0.8298      0.3814
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_MCP3_eur.sumstats.gz  NA  NA  NA  NA    131.1     139.4   0.3482    0.6681   0.5543      0.6377
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_MCSF_eur.sumstats.gz  NA  NA  NA  NA   -41.77     156.9    1.083    0.9155   0.2257      0.4233
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_MIF_eur.sumstats.gz  NA  NA  NA  NA   -40.84      28.3      1.5    0.6833   0.8493      0.3276
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_MIG_eur.sumstats.gz  NA  NA  NA  NA   -56.39     42.35    2.162     1.027  0.07842      0.5263
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz            ../output_sumstats/output_pmid27989323_MIP1a_eur.sumstats.gz  NA  NA  NA  NA     28.3     14.17   0.1852    0.2669   0.5265      0.2501
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz            ../output_sumstats/output_pmid27989323_MIP1b_eur.sumstats.gz  NA  NA  NA  NA   -28.17     33.75    3.575     1.818    1.501       1.239
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz           ../output_sumstats/output_pmid27989323_PDGFbb_eur.sumstats.gz  NA  NA  NA  NA    25.22     6.594 -0.00648    0.2167    0.402      0.2053
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz           ../output_sumstats/output_pmid27989323_RANTES_eur.sumstats.gz  NA  NA  NA  NA   -54.47     42.61    1.782    0.9993  -0.1275      0.5345
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid27989323_SCF_eur.sumstats.gz  NA  NA  NA  NA    1.731     9.744     1.19    0.5261   0.3937      0.6616
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz            ../output_sumstats/output_pmid27989323_SCGFb_eur.sumstats.gz  NA  NA  NA  NA   -30.21     25.54    1.219    0.6152  -0.1049      0.8207
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_SDF1_eur.sumstats.gz  NA  NA  NA  NA    4.256     10.54   0.6531    0.4056  -0.2364      0.2913
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_TNFa_eur.sumstats.gz  NA  NA  NA  NA   -2.544     12.74   0.5974    0.2816 -0.09741       0.516
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_TNFb_eur.sumstats.gz  NA  NA  NA  NA    37.33     26.55   0.4039    0.2432   0.1364      0.4334
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz            ../output_sumstats/output_pmid27989323_TRAIL_eur.sumstats.gz  NA  NA  NA  NA    -8.87     22.35    1.877     1.209  -0.1961      0.5976
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_bNGF_eur.sumstats.gz  NA  NA  NA  NA   -27.36     19.94    1.181    0.4981 -0.05346      0.3071
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz          ../output_sumstats/output_pmid27989323_eotaxin_eur.sumstats.gz  NA  NA  NA  NA    35.91     10.79   0.1869    0.3177   0.5101      0.4491
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz             ../output_sumstats/output_pmid27989323_ip10_eur.sumstats.gz  NA  NA  NA  NA    39.47     35.53   0.7114     0.634   0.2722       0.341
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid29566793_ALS_eur.sumstats.gz  NA  NA  NA  NA   0.8643    0.9324   0.6229    0.4508   0.3275      0.7203
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz       ../output_sumstats/output_pmid29632382_T2d-BMIadj_eur.sumstats.gz  NA  NA  NA  NA       NA        NA       NA        NA       NA          NA
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid30054458_T2d_eur.sumstats.gz  NA  NA  NA  NA       NA        NA       NA        NA       NA          NA
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz               ../output_sumstats/output_pmid33111402_PD_eur.sumstats.gz  NA  NA  NA  NA       NA        NA       NA        NA       NA          NA
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz               ../output_sumstats/output_pmid33310728_RA_eur.sumstats.gz  NA  NA  NA  NA    1.015    0.4114   0.5176    0.4297  -0.1715       1.058
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid33589841_LBD_eur.sumstats.gz  NA  NA  NA  NA     15.2     5.237   0.2389    0.1914   0.1305      0.2089
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz               ../output_sumstats/output_pmid33987465_PD_eur.sumstats.gz  NA  NA  NA  NA   -1.758      19.8    0.825    0.3653  -0.4462      0.4828
+ ../output_sumstats/output_pmid27989323_GROa_eur.sumstats.gz              ../output_sumstats/output_pmid34737426_APH_eur.sumstats.gz  NA  NA  NA  NA  -0.1957    0.1539    1.029    0.4782   0.2279      0.3443
+
+Analysis finished at Sat Feb 24 09:08:51 2024
+Total time elapsed: 8.0m:47.21s
