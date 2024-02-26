@@ -126,11 +126,12 @@ df_aggregated_all_sign <- df_all_adjusted_significant %>%
   ungroup()
 
 matrix_df_correction_sign <- spread(df_aggregated_all_sign, key = p1_id, value = rg)
+matrix_df_correction_sign[is.na(matrix_df_correction_sign)] <- 0
 
 row_names <- matrix_df_correction_sign$p2_id
 matrix_df_correction_sign$p2_id <- NULL
 rownames(matrix_df_correction_sign) <- row_names
-matrix_df_correction_sign[is.na(matrix_df_correction_sign)] <- 0
+
 
 matrix_df_correction_sign <- as.matrix(matrix_df_correction_sign)
 
