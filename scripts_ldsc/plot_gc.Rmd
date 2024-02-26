@@ -16,7 +16,7 @@ library(reshape2)
 ```{r}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 folder_path <- "../output_ld_regression"
-folder_path_plots <- "../plots/"
+folder_path_plots <- "../plots_ldsc/"
 folder_barplots <- "../plots/barplots"
 folder_heatmaps <- "../plots/heatmaps"
 
@@ -54,66 +54,8 @@ df_adjusted <- read.table(paste(folder_path,"/complete_df_adjusted.tsv", sep="")
 
 matrix <- read.table(paste(folder_path, "/matrix_df.tsv", sep=""), header=TRUE)
 matrix_woCorrection <- read.table(paste(folder_path, "/matrix_df_woCorrection.tsv", sep=""), header=TRUE)
-```
+matrix_correction_sign <- read.table(paste(folder_path, "/matrix_df_correction_sign.tsv", sep=""), header=TRUE)
 
-
-# Create barplots (and boxplots) for each p1_id 
-```{r}
-for (file in files) {
-  data <- read.table(file, header = TRUE, sep = "\t")
-  unique_p1_id <- unique(data$p1_id)
-  
-  barplot_gc <- ggplot(data, aes(x = id, y = rg, fill = method)) +
-                  geom_bar(stat = "identity", position = "dodge") +
-                  geom_errorbar(aes(ymin = rg - se, ymax = rg + se), width = 0.2, position = position_dodge(0.9)) + # Add error bars
-                  scale_fill_manual(values = c("ldsc" = "coral")) +
-                  labs(x = "", y = "Genetic Correlation", title = paste("Genetic Correlation of", unique_p1_id, "(LDSC)")) +
-                  theme(axis.text.x = element_text(angle = 90, hjust = 0.5, vjust = 0.5, size = 8)) +
-                  theme(legend.position = c(0.9, 0.99),
-                        legend.text = element_text(size = 8)) + # Adjust legend text size
-                  guides(fill = guide_legend(title = "Method", override.aes = list(fill = c("coral"))))
-
-  # Save barplot
-  ggsave(file = paste(folder_barplots, "/barplot_", unique_p1_id, ".png", sep = ""), plot = barplot_gc, width = 8, height = 6, units = "in", dpi = 300)
-}
-```
-
-```{r}
-# Capping values (>1 -> 1 and <-1 -> -1) --> Since meeting (19.02.) gc >1 -> 0 and gc<-1 -> 0, thus no capping is necessary anymore 
-
-# for (file in files_capped) {
-#   data_capped <- read.table(file, header = TRUE, sep = "\t")
-#   unique_p1_id <- unique(data_capped$p1_id)
-#   
-#   barplot_gc_capped <- ggplot(data_capped, aes(x = id, y = rg, fill = method)) +
-#                   geom_bar(stat = "identity", position = "dodge") +
-#                   geom_errorbar(aes(ymin = rg - se, ymax = rg + se), width = 0.2, position = position_dodge(0.9)) + # Add error bars
-#                   scale_fill_manual(values = c("ldsc" = "coral")) +
-#                   labs(x = "", y = "Genetic Correlation", title = paste("Genetic Correlation of", unique_p1_id, "(capped values, LDSC)")) +
-#                   theme(axis.text.x = element_text(angle = 90, hjust = 0.5, vjust = 0.5, size = 8)) +
-#                   theme(legend.position = c(0.9, 0.99),
-#                         legend.text = element_text(size = 8)) + # Adjust legend text size
-#                   guides(fill = guide_legend(title = "Method", override.aes = list(fill = c("coral"))))
-# 
-#   # Save barplot
-#   ggsave(file = paste("../plots/barplots/barplot_", unique_p1_id, "_capped.png", sep = ""), plot = barplot_gc_capped, width = 8, height = 6, units = "in", dpi = 300)
-# }
-```
-
-# Create a heatmap over all correlations and save it
-# Not necessary as we have the pheatmap below
-```{r}
-# heatmap_plot <- ggplot(data = df_adjusted, aes(x = p2_id, y = p1_id, fill = rg)) +
-#   geom_tile() +
-#   scale_fill_gradient(low = "firebrick4", high = "royalblue4") +
-#   labs(x = "", y = "", title = "Genetic Correlation Heatmap (LDSC)") +
-#   theme(axis.text.x = element_blank(),  # Remove x-axis labels from the bottom
-#         axis.text.x.top = element_text(angle = 45, hjust = 1),  # Add x-axis labels to the top
-#         axis.text.y = element_text(angle = 45, hjust = 1),   
-#         plot.title = element_text(hjust = 0.5))
-# heatmap_plot
-# # Save the heatmap plot
-# ggsave(file = paste(folder_heatmaps, "/heatmap_ggplot_ldsc.png", sep = ""), plot = heatmap_plot, width = 8, height = 6, units = "in", dpi = 300)
 ```
 
 #Pheatmap
@@ -131,17 +73,17 @@ pheatmap_plot_withoutHclust <- pheatmap(matrix,
                           annotation_col = NULL,  # Use column names as annotations at the top
                           border_col = NA,
                           annotation_row = NULL, 
-                          fontsize = 7.5,          # Set fontsize for labels
+                          fontsize = 13,          # Set fontsize for labels
                           main = "Genetic Correlation Heatmap - corrected gc values (LDSC)", 
                           angle_col = 90,       
                           angle_row = 0,        
-                          fontsize_row = 7.5,      # Set fontsize for row labels
-                          fontsize_col = 7.5,      # Set fontsize for column labels
-                          cellwidth = 7,        # Set cell width
-                          cellheight = 7,       # Set cell height
+                          fontsize_row = 9,      # Set fontsize for row labels
+                          fontsize_col = 9,      # Set fontsize for column labels
+                          cellwidth = 11,        # Set cell width
+                          cellheight = 11,       # Set cell height
                           col = my_palette       # Color scheme
 )
-ggsave(paste(folder_heatmaps, "/pheatmap_plot_withoutHclust_ldsc.png", sep=""), plot = pheatmap_plot_withoutHclust, width = 7, height = 7, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps, "/pheatmap_plot_withoutHclust_ldsc.png", sep=""), plot = pheatmap_plot_withoutHclust, width = 13.5, height = 14, units = "in", dpi = 300)
 # With hclust 
 pheatmap_plot_hclust <- pheatmap(matrix,
                           cluster_rows = FALSE,  
@@ -149,17 +91,17 @@ pheatmap_plot_hclust <- pheatmap(matrix,
                           annotation_col = NULL,  # Use column names as annotations at the top
                           border_col = NA,
                           annotation_row = NULL, 
-                          fontsize = 7.5,          # Set fontsize for labels
+                          fontsize = 13,          # Set fontsize for labels
                           main = "Genetic Correlation Heatmap - corrected gc values and hclust (LDSC)", 
                           angle_col = 90,       
                           angle_row = 0,        
-                          fontsize_row = 7.5,      # Set fontsize for row labels
-                          fontsize_col = 7.5,      # Set fontsize for column labels
-                          cellwidth = 7,        # Set cell width
-                          cellheight = 7,       # Set cell height
+                          fontsize_row = 9,      # Set fontsize for row labels
+                          fontsize_col = 9,      # Set fontsize for column labels
+                          cellwidth = 11,        # Set cell width
+                          cellheight = 11,       # Set cell height
                           col = my_palette       # Color scheme
 )
-ggsave(paste(folder_heatmaps, "/pheatmap_plot_hclust_ldsc.png", sep="") , plot = pheatmap_plot_hclust, width = 7, height = 7, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps, "/pheatmap_plot_hclust_ldsc.png", sep="") , plot = pheatmap_plot_hclust, width = 13.5, height = 14, units = "in", dpi = 300)
 
 # Create pheatmap without corrected correlation values (>1 and <-1 values are not corrected)
 
@@ -170,17 +112,17 @@ pheatmap_plot_woCorrection_withoutHclust <- pheatmap(matrix_woCorrection,
                           annotation_col = NULL,  # Use column names as annotations at the top
                           border_col = NA,
                           annotation_row = NULL, 
-                          fontsize = 8,          # Set fontsize for labels
+                          fontsize = 13,          # Set fontsize for labels
                           main = "Genetic Correlation Heatmap - uncorrected gc values (LDSC)", 
                           angle_col = 90,       
                           angle_row = 0,        
-                          fontsize_row = 6,      # Set fontsize for row labels
-                          fontsize_col = 6,      # Set fontsize for column labels
-                          cellwidth = 7,        # Set cell width
-                          cellheight = 7,       # Set cell height
+                          fontsize_row = 9,      # Set fontsize for row labels
+                          fontsize_col = 9,      # Set fontsize for column labels
+                          cellwidth = 11,        # Set cell width
+                          cellheight = 11,       # Set cell height
                           col = my_palette       # Color scheme
 )
-ggsave(paste(folder_heatmaps, "/pheatmap_plot_woCorrection_withoutHclust_ldsc.png", sep=""), plot = pheatmap_plot_woCorrection_withoutHclust, width = 7, height = 7, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps, "/pheatmap_plot_woCorrection_withoutHclust_ldsc.png", sep=""), plot = pheatmap_plot_woCorrection_withoutHclust, width = 13.5, height = 14, units = "in", dpi = 300)
 
 # With hclust 
 pheatmap_plot_woCorrection_hclust <- pheatmap(matrix_woCorrection,
@@ -189,17 +131,54 @@ pheatmap_plot_woCorrection_hclust <- pheatmap(matrix_woCorrection,
                           annotation_col = NULL,  # Use column names as annotations at the top
                           border_col = NA,
                           annotation_row = NULL, 
-                          fontsize = 8,          # Set fontsize for labels
+                          fontsize = 13,          # Set fontsize for labels
                           main = "Genetic Correlation Heatmap - uncorrected gc values and hclust (LDSC)", 
                           angle_col = 90,       
                           angle_row = 0,        
-                          fontsize_row = 6,      # Set fontsize for row labels
-                          fontsize_col = 6,      # Set fontsize for column labels
-                          cellwidth = 7,        # Set cell width
-                          cellheight = 7,       # Set cell height
+                          fontsize_row = 9,      # Set fontsize for row labels
+                          fontsize_col = 9,      # Set fontsize for column labels
+                          cellwidth = 11,        # Set cell width
+                          cellheight = 11,       # Set cell height
                           col = my_palette       # Color scheme
 )
-ggsave(paste(folder_heatmaps, "/pheatmap_plot_woCorrection_hclust_ldsc.png", sep=""), plot = pheatmap_plot_woCorrection_hclust, width = 7, height = 7, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps, "/pheatmap_plot_woCorrection_hclust_ldsc.png", sep=""), plot = pheatmap_plot_woCorrection_hclust, width = 13.5, height = 14, units = "in", dpi = 300)
+
+
+pheatmap_plot_corr_sign <- pheatmap(matrix_correction_sign,
+                          cluster_rows = FALSE,  
+                          cluster_cols = FALSE, 
+                          annotation_col = NULL,  # Use column names as annotations at the top
+                          border_col = NA,
+                          annotation_row = NULL, 
+                          fontsize = 13,          # Set fontsize for labels
+                          main = "Genetic Correlation Heatmap - corrected gc values and p<0.05 (LDSC)", 
+                          angle_col = 90,       
+                          angle_row = 0,        
+                          fontsize_row = 9,      # Set fontsize for row labels
+                          fontsize_col = 9,      # Set fontsize for column labels
+                          cellwidth = 11,        # Set cell width
+                          cellheight = 11,       # Set cell height
+                          col = my_palette       # Color scheme
+)
+ggsave(paste(folder_heatmaps, "/pheatmap_corr_sign_ldsc.png", sep=""), plot = pheatmap_plot_corr_sign, width = 13.5, height = 14, units = "in", dpi = 300)
+
+# pheatmap_plot_corr_sign_hclust <- pheatmap(matrix_correction_sign,
+#                           cluster_rows = FALSE,  
+#                           cluster_cols = TRUE, 
+#                           annotation_col = NULL,  # Use column names as annotations at the top
+#                           border_col = NA,
+#                           annotation_row = NULL, 
+#                           fontsize = 13,          # Set fontsize for labels
+#                           main = "Genetic Correlation Heatmap - corrected gc values and p<0.05 and hclust (LDSC)", 
+#                           angle_col = 90,       
+#                           angle_row = 0,        
+#                           fontsize_row = 9,      # Set fontsize for row labels
+#                           fontsize_col = 9,      # Set fontsize for column labels
+#                           cellwidth = 11,        # Set cell width
+#                           cellheight = 11,       # Set cell height
+#                           col = my_palette       # Color scheme
+# )
+# ggsave(paste(folder_heatmaps, "/pheatmap_corr_sign_hclust_ldsc.png", sep=""), plot = pheatmap_plot_corr_sign_hclust, width = 13.5, height = 14, units = "in", dpi = 300)
 ```
 
 
@@ -242,42 +221,96 @@ sum_of_notzeros <- colSums(matrix != 0)
 median_of_notzeros <- median(sum_of_notzeros)
 median_matrix <- matrix[sum_of_notzeros > median_of_notzeros, sum_of_notzeros > median_of_notzeros]
 
-pheatmap_median <- pheatmap(median_matrix,
+# only those where the diag value = 1or in tolerance range 
+#todo
+diag_vals <- diag(as.matrix(median_matrix))
+filtered_median_matrix <- median_matrix[diag_vals >= 0.995 & diag_vals <= 1.005, diag_vals >= 0.995 & diag_vals <= 1.005]
+
+pheatmap_median <- pheatmap(filtered_median_matrix,
                           cluster_rows = FALSE,  
                           cluster_cols = FALSE, 
                           annotation_col = NULL,  # Use column names as annotations at the top
                           border_col = NA,
                           annotation_row = NULL, 
-                          fontsize = 7.5,          # Set fontsize for labels
+                          fontsize = 10,          # Set fontsize for labels
                           main = "Genetic Correlation Heatmap \n median as threshold (LDSC)", 
                           angle_col = 90,       
                           angle_row = 0,        
-                          fontsize_row = 7.5,      # Set fontsize for row labels
-                          fontsize_col = 7.5,      # Set fontsize for column labels
+                          fontsize_row = 6.5,      # Set fontsize for row labels
+                          fontsize_col = 6.5,      # Set fontsize for column labels
                           cellwidth = 10,        # Set cell width
                           cellheight = 10,       # Set cell height
                           col = my_palette       # Color scheme
 )
-ggsave(paste(folder_heatmaps, "/pheatmap_median.png", sep=""), plot = pheatmap_median, width = 4, height = 4, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps, "/pheatmap_median.png", sep=""), plot = pheatmap_median, width = 7.5, height = 7.5, units = "in", dpi = 300)
 
-pheatmap_median_hclust <- pheatmap(median_matrix,
+pheatmap_median_hclust <- pheatmap(filtered_median_matrix,
                           cluster_rows = FALSE,  
                           cluster_cols = TRUE, 
                           annotation_col = NULL,  # Use column names as annotations at the top
                           border_col = NA,
                           annotation_row = NULL, 
-                          fontsize = 7.5,          # Set fontsize for labels
+                          fontsize = 10,          # Set fontsize for labels
                           main = "Genetic Correlation Heatmap \n median as threshold and clustering (LDSC)", 
                           angle_col = 90,       
                           angle_row = 0,        
-                          fontsize_row = 7.5,      # Set fontsize for row labels
-                          fontsize_col = 7.5,      # Set fontsize for column labels
+                          fontsize_row = 6.5,      # Set fontsize for row labels
+                          fontsize_col = 6.5,      # Set fontsize for column labels
                           cellwidth = 8,        # Set cell width
                           cellheight = 8,       # Set cell height
                           col = my_palette       # Color scheme
 )
 
-ggsave(paste(folder_heatmaps, "/pheatmap_median_hclust.png", sep=""), plot = pheatmap_median_hclust, width = 4, height = 4, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps, "/pheatmap_median_hclust.png", sep=""), plot = pheatmap_median_hclust, width = 6, height = 7.5, units = "in", dpi = 300)
+
+```
+
+```{r}
+sum_of_notzeros_sign <- colSums(matrix_correction_sign != 0)
+median_of_notzeros_sign <- median(sum_of_notzeros_sign)
+median_matrix_sign <- matrix_correction_sign[sum_of_notzeros_sign > median_of_notzeros_sign, sum_of_notzeros_sign > median_of_notzeros_sign]
+
+# only those where the diag value = 1or in tolerance range 
+#todo
+diag_vals_sign <- diag(as.matrix(median_matrix_sign))
+filtered_median_matrix_sign <- median_matrix_sign[diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005, diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005]
+
+pheatmap_median_sign <- pheatmap(filtered_median_matrix_sign,
+                          cluster_rows = FALSE,  
+                          cluster_cols = FALSE, 
+                          annotation_col = NULL,  # Use column names as annotations at the top
+                          border_col = NA,
+                          annotation_row = NULL, 
+                          fontsize = 10,          # Set fontsize for labels
+                          main = "Genetic Correlation Heatmap \n median as threshold (p<0.05) (LDSC)", 
+                          angle_col = 90,       
+                          angle_row = 0,        
+                          fontsize_row = 6.5,      # Set fontsize for row labels
+                          fontsize_col = 6.5,      # Set fontsize for column labels
+                          cellwidth = 10,        # Set cell width
+                          cellheight = 10,       # Set cell height
+                          col = my_palette       # Color scheme
+)
+ggsave(paste(folder_heatmaps, "/pheatmap_median_sign.png", sep=""), plot = pheatmap_median_sign, width = 7.5, height = 7.5, units = "in", dpi = 300)
+
+pheatmap_median_hclust_sign <- pheatmap(filtered_median_matrix_sign,
+                          cluster_rows = FALSE,  
+                          cluster_cols = TRUE, 
+                          annotation_col = NULL,  # Use column names as annotations at the top
+                          border_col = NA,
+                          annotation_row = NULL, 
+                          fontsize = 10,          # Set fontsize for labels
+                          main = "Genetic Correlation Heatmap \n median as threshold and clustering (p<0.05) (LDSC)", 
+                          angle_col = 90,       
+                          angle_row = 0,        
+                          fontsize_row = 6.5,      # Set fontsize for row labels
+                          fontsize_col = 6.5,      # Set fontsize for column labels
+                          cellwidth = 8,        # Set cell width
+                          cellheight = 8,       # Set cell height
+                          col = my_palette       # Color scheme
+)
+
+ggsave(paste(folder_heatmaps, "/pheatmap_median_hclust_sign.png", sep=""), plot = pheatmap_median_hclust_sign, width = 6, height = 7.5, units = "in", dpi = 300)
 
 ```
 
