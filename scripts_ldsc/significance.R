@@ -1,21 +1,18 @@
-# This file is for checking the significance of the given 61 GWAS studies. 
+# Archive script! 
+# This file is for checking the significance of the given 61 GWAS studies in order to only analyze the significant GWAS studies (LDSC and HDL analysing).
+# Important: The tools (ldsc and hdl) need the whole GWAS data and no data filtered for significance. 
+# Thus, this script is an archived script!
 
+
+# Set the working directory 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
-# Create a list that contains all the input files (regarding single_GWAS folder)
-# Prerequisite: Please download the folders at google drive (called singleGWAS and cytokines) into "input_files" 
-folder_singleG <- "../input_files/single_GWAS"
-filelist_singleG <- list.files(folder_singleG, pattern = "\\.tsv\\.gz$", full.names = TRUE)
+# Directory of the GWAS files 
+folder_singleG_cyt <- "../input_files/single_GWAS_cytokines"
+filelist_singleG_cyt <- list.files(folder_singleG, pattern = "\\.tsv\\.gz$", full.names = TRUE)
 
-# Create a list that contains all the input files (regarding cytokine folder)
-folder_cytokine <- "../input_files/cytokines"
-filelist_cytokine <- list.files(folder_cytokine, pattern = "\\.tsv\\.gz$", full.names = TRUE)
-
-# Combine both lists that contain the input files 
-combined_filelist <- c(filelist_singleG, filelist_cytokine)
-
-# Location of the folder where the included studies should be stored
-included_folderpath <- "../input_files/significant_cytokines_singleGWAS"
+# Location of the folder where the included significant studies should be stored
+included_folderpath <- "../input_files/significant_single_GWAS_cytokines"
 
 # Check if the folder exists
 if (!dir.exists(included_folderpath)) {
@@ -26,13 +23,11 @@ if (!dir.exists(included_folderpath)) {
   print(paste("Folder", included_folderpath, "already exists."))
 }
 
-
-# List with files that stores the included studies
+# List with files that stores the included (significant) studies
 included_files <- c()
 
 # Go through every file
-for (file in combined_filelist) {
-  print(file)
+for (file in filelist_singleG_cyt) {
   data <- read.delim(file)
   
   # Check for NA values in "pvalue" column
@@ -111,10 +106,8 @@ for (file in combined_filelist) {
     
 }
 
-destination_folder <- "../input_files/significant_cytokines_singleGWAS"
-
 # Loop through each file path in the list and copy it to the destination folder
 for (file_path in included_files) {
-  file.copy(file_path, destination_folder)
+  file.copy(file_path, included_folderpath)
 }
 
