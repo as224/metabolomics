@@ -34,7 +34,7 @@ for file in "$significant_singleGWAS_cytokines"/*; do
     # Command
     Rscript "../HDL/HDL.data.wrangling.R" \
     gwas.file="$file" \
-    LD.path=../reference_panels_hdl/UKB_array_SVD_eigen90_extraction \
+    LD.path=../input_files/UKB_array_SVD_eigen90_extraction \
     SNP=SNP A1=effect_allele A2=non_effect_allele N=sample_size b=beta_effect se=SE \
     output.file="$output_filename" \
     log.file="$output_filename"
