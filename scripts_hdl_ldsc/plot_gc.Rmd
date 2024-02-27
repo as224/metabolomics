@@ -56,6 +56,9 @@ if (!dir.exists(folder_heatmaps_hdl)) {
 matrix_ldsc <- read.table(paste(folder_path_ldsc, "/matrix_df_ldsc.tsv", sep=""), header=TRUE)
 matrix_woCorrection_ldsc <- read.table(paste(folder_path_ldsc, "/matrix_df_woCorrection_ldsc.tsv", sep=""), header=TRUE)
 matrix_corr_sign_ldsc <- read.table(paste(folder_path_ldsc, "/matrix_df_correction_sign_ldsc.tsv", sep=""), header=TRUE)
+# filter out GWAS studies where diag=0 of matrix_corr_sign_ldsc 
+diag_vals_sign <- diag(as.matrix(median_matrix_sign))
+matrix_corr_sign_ldsc_diagfiltered <- matrix_corr_sign_ldsc[diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005, diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005]
 
 # Read HDL files
 matrix_hdl <- read.table(paste(folder_path_hdl, "/matrix_df_hdl.tsv", sep=""), header=TRUE)
@@ -154,7 +157,7 @@ ggsave(paste(folder_heatmaps_ldsc, "/pheatmap_plot_woCorrection_hclust_ldsc.png"
 # Create pheatmap for corrected gc and significant p-values
 
 # Without hclust 
-pheatmap_plot_woCorrection_withoutHclust <- pheatmap(matrix_corr_sign_ldsc,
+pheatmap_plot_corr_sign_withoutHclust <- pheatmap(matrix_corr_sign_ldsc_diagfiltered,
                           cluster_rows = FALSE,  
                           cluster_cols = FALSE, 
                           annotation_col = NULL,  # Use column names as annotations at the top
@@ -171,10 +174,10 @@ pheatmap_plot_woCorrection_withoutHclust <- pheatmap(matrix_corr_sign_ldsc,
                           col = my_palette,       # Color scheme
                           breaks = seq(-1, 1, length.out = 101)  # Define breaks from -1 to 1
 )
-ggsave(paste(folder_heatmaps_ldsc, "/pheatmap_plot_corr_sign_withoutHclust_ldsc.png", sep=""), plot = pheatmap_plot_woCorrection_withoutHclust, width = 7, height = 7, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps_ldsc, "/pheatmap_plot_corr_sign_withoutHclust_ldsc.png", sep=""), plot = pheatmap_plot_corr_sign_withoutHclust, width = 7, height = 7, units = "in", dpi = 300)
 
 # With hclust 
-pheatmap_plot_woCorrection_hclust <- pheatmap(matrix_corr_sign_ldsc,
+pheatmap_plot_corr_sign_hclust <- pheatmap(matrix_corr_sign_ldsc_diagfiltered,
                           cluster_rows = FALSE,  
                           cluster_cols = TRUE, 
                           annotation_col = NULL,  # Use column names as annotations at the top
@@ -191,7 +194,7 @@ pheatmap_plot_woCorrection_hclust <- pheatmap(matrix_corr_sign_ldsc,
                           col = my_palette,       # Color scheme
                           breaks = seq(-1, 1, length.out = 101)  # Define breaks from -1 to 1
 )
-ggsave(paste(folder_heatmaps_ldsc, "/pheatmap_plot_corr_sign_hclust_ldsc.png", sep=""), plot = pheatmap_plot_woCorrection_hclust, width = 7, height = 7, units = "in", dpi = 300)
+ggsave(paste(folder_heatmaps_ldsc, "/pheatmap_plot_corr_sign_hclust_ldsc.png", sep=""), plot = pheatmap_plot_corr_sign_hclust, width = 7, height = 7, units = "in", dpi = 300)
 ```
 
 #Pheatmap HDL
