@@ -2,12 +2,17 @@
 
 The main goal of this project is exploring genetic correlations and molecular overlaps in inflammatory and autoimmune diseases to prioritize molecular markers and pathways. 
 
+## Table of Contents
+1. [LDSC](#LDSC-overall)
+2. [Setup Instructions for LDSC](#setup-instructions-ldsc)
+3. [Workflow of LDSC and HDL](#workflow-ldsc-hdl)
 
-## LDSC 
+
+## LDSC <a name="LDSC-overall"></a>
 The LD Score Regression method, designed to estimate heritability and genetic correlation between different GWAS summary statistics, is implemented as a tool. The main repository for it can be found here: https://github.com/bulik/ldsc.
 In our analysis, we applied their algorithm to 67 GWAS studies. The list of their ID's can be found at /input_files/GWAS_ids.tsv. 
 
-### Setup Instructions for LDSC
+### Setup Instructions for LDSC <a name="setup-instructions-ldsc"></a>
 
 To maintain the proper folder structure in your cloned GitHub repository, please follow these steps:
 
@@ -46,9 +51,12 @@ Clone the proper LDSC GitHub repository ([https://github.com/bulik/ldsc.git](htt
 
 Following these steps will organize the data effectively for using this repository properly.
 
-Below one can familiarize with our workflow for utilizing LDSC and HDL. It is crucial to follow these steps in order to reproduce our results.
+In order to understand our analysis, please follow the [Workflow of LDSC and HD](#workflow-ldsc-hdl). 
 
-## Workflow of LDSC and HDL
+
+## Workflow of LDSC and HDL <a name="workflow-ldsc-hdl"></a>
+The following figure describes our workflow for utilizing the LDSC and HDL approach. It is crucial to follow these steps in order to reproduce our results. 
+
 ![Alt text](https://github.com/as224/metabolomics/blob/main/workflow_ldsc_hdl.png "Workflow LDSC and HDL")
 
 
