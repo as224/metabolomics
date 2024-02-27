@@ -9,4 +9,5 @@ In our analysis, we applied their algorithm to 67 GWAS studies. The list of thei
 
 Below one can familiarize with our workflow for utilizing LDSC and HDL. It is crucial to follow these steps in order to reproduce our results.
 
-[Download PDF](workflow_ldsc_hdl.pdf)
+
+<p align="center"><img src="https://github.com/as224/metabolomics/workflow_ldsc_hdl.pdf" width="640px"></p>
