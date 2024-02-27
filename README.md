@@ -25,8 +25,8 @@ Download all the desired GWAS studies and save them as input files in the "input
   - `eur` (or `eas`, etc.): Indicates the continent of the study's population.
 
 For example:
-- `pmid12345678_obesity_eur.tsv`
-- `pmid98765432_diabetes_eas.tsv`
+- `pmid21833088_MS_eur.tsv`
+- `pmid29632382_T2d-BMIadj_eur.tsv`
 
 #### 3. Download Additional Files
 
