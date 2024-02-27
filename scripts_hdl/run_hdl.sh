@@ -39,7 +39,7 @@ for ((i = 0; i < ${#files[@]}; i++)); do
         Rscript "../HDL/HDL.run.R" \
         gwas1.df=$file1 \
         gwas2.df=$file2 \
-        LD.path="../reference_panels_hdl/UKB_array_SVD_eigen90_extraction" \
+        LD.path="../input_files/UKB_array_SVD_eigen90_extraction" \
         output.file=$output_filename \
         numCores=4
 
