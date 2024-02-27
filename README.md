@@ -11,7 +11,7 @@ The main goal of this project is exploring genetic correlations and molecular ov
 
 
 ## LDSC <a name="LDSC-overall"></a>
-The LD Score Regression method, designed to estimate heritability and genetic correlation between different GWAS summary statistics, is implemented as a tool. The main repository for it can be found here: [https://github.com/bulik/ldsc](https://github.com/bulik/ldsc)
+The LD Score Regression method, designed to estimate heritability and genetic correlation between different GWAS summary statistics, is implemented as a tool. The main repository for it can be found here: [https://github.com/bulik/ldsc](https://github.com/bulik/ldsc).
 In our analysis, we applied their algorithm to 67 GWAS studies. The list of their ID's can be found at /input_files/GWAS_ids.tsv. 
 
 ### Setup Instructions for LDSC <a name="setup-instructions-ldsc"></a>
@@ -56,7 +56,7 @@ Following these steps will organize the data effectively for using this reposito
 
 ## HDL <a name="HDL-overall"></a>
 As an extension to LDSC, the High-Definition Likelihood (HDL) method was developed to enhance precision in estimating genetic correlations. The tool generates summary statistics for input GWAS files and calculates the genetic correlation between GWAS pairs. 
-For a more comprehensive understanding of the tool, detailed information can be found on the associated GitHub repository: [https://github.com/zhenin/HDL](https://github.com/zhenin/HDL)
+For a more comprehensive understanding of the tool, detailed information can be found on the associated GitHub repository: [https://github.com/zhenin/HDL](https://github.com/zhenin/HDL).
 In our analysis, we also employed the HDL method to the 67 GWAS studies mentioned above. (/input_files/GWAS_ids.tsv)
 
 ### Setup Instructions for HDL <a name="setup-instructions-hdl"></a>
