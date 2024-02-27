@@ -3,11 +3,43 @@
 The main goal of this project is exploring genetic correlations and molecular overlaps in inflammatory and autoimmune diseases to prioritize molecular markers and pathways. 
 
 ## Table of Contents
-1. [LDSC](#LDSC-overall)
-2. [Setup Instructions for LDSC](#setup-instructions-ldsc)
-3. [HDL](#HDL-overall)
-4. [Setup Instructions for HDL](#setup-instructions-hdl)
-5. [Workflow of LDSC and HDL](#workflow-ldsc-hdl)
+1. [Harmonization of a GWAS Study](#harmonize)
+2. [LDSC](#LDSC-overall)
+3. [Setup Instructions for LDSC](#setup-instructions-ldsc)
+4. [HDL](#HDL-overall)
+5. [Setup Instructions for HDL](#setup-instructions-hdl)
+6. [Workflow of LDSC and HDL](#workflow-ldsc-hdl)
+
+## Harmonization <a name="harmonize"></a>
+The main objective here is to ensure a consistent format for the GWAS studies utilized in the subsequent analytical procedures. Consequently, the availability of the necessary values is guaranteed.
+
+### Requirements:
+
+### 1. Harmonize.sh
+Command: bash harmonize.sh -i gwas -t trait [--pvalue] [--bed] [--eaf] 
+
+Parameters: 
+- -i: The GWAS study that is harmonized (in gzip format)
+- -t: the studied trait
+- --pvalue: include, if SNPs with a p-value >= 0.05 should be excluded
+- --bed: include, if a .bed file should be created
+- --eaf: include, if invalid EAFs should be filtered
+
+### 2. 2_merger_colnames.pl
+Command: perl 2_merger_colnames.pl  resulting_SH_file  dbsnp output_file
+
+Parameters: 
+- resulting_SH_file: output file of bring_to_gwascatalog_format.sh
+-	dbsnp: theoretically, here, dbsnp files can be used to add allele frequency from dbSNP to the study file and/or fix MAF in case it was provided.
+-	output_file: output directory
+
+
+### 3. other scripts
+- bring_to_gwascatalog_format.sh: 
+- preprocess.sh:
+- filter_pval.py: alternative script for p-value filtering
+- filter_EAF.py: used during Harmonization if --pvalue is added
+
 
 
 ## LDSC <a name="LDSC-overall"></a>
