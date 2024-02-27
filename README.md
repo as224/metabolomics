@@ -47,7 +47,7 @@ In the "input_files" folder, also download the following files from the provided
 
 #### 4. Clone the Proper LDSC GitHub Repository
 
-Clone the proper LDSC GitHub repository ([https://github.com/bulik/ldsc.git](https://github.com/bulik/ldsc.git)) into the metabolomics repository with the following structure: `metabolomics/ldsc`.
+Clone the proper LDSC GitHub repository (https://github.com/bulik/ldsc) into the metabolomics repository with the following structure: `metabolomics/ldsc`.
 
 Following these steps will organize the data effectively for using this repository properly.
 
