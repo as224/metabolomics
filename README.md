@@ -1,6 +1,6 @@
 # Metabolomics
 
-The main goal of this profect is exploring genetic correlations and molecular overlaps in inflammatory and autoimmune diseases to prioritize molecular markers and pathways. 
+The main goal of this project is exploring genetic correlations and molecular overlaps in inflammatory and autoimmune diseases to prioritize molecular markers and pathways. 
 
 
 ## LDSC 
