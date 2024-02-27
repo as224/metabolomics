@@ -2,13 +2,13 @@
 
 # This script creates all sumstats files for the given input files (singleGWAS and cytokine folder)
 
-# Prerequisite: Please download the folder singleGWAS and cytokines from google Drive into the folder "input_folder". 
-# Prerequisite: Run the R script significant.R in order to filter for significant GWAS studies. 
+# Prerequisite: Please download the folder singleGWAS and cytokines from google Drive into the folder "input_files". 
+# Prerequisite: Run run_adjustingEverything.sh before to check and adjust the tsv files
 
-significant_singleGWAS_cytokines="../input_files/significant_cytokines_singleGWAS"
-sumstats="../output_wrangling/"
+significant_singleGWAS_cytokines="../input_files/single_GWAS_cytokines_filtered" # GWAS input files
+sumstats="../output_wrangling/" # output path
 
-# Check if the folder exists
+# Check if the sumstats folder exists
 if [ ! -d "$sumstats" ]; then
   # If the folder does not exist, create it
   mkdir -p "$sumstats"
@@ -17,7 +17,7 @@ else
   echo "Folder $sumstats already exists."
 fi
 
-# Iterate through each file in the unzipped_files and create a sumstats file for each
+# Iterate through each file in the single_GWAS_cytokines_filtered and create a sumstats file for each
 for file in "$significant_singleGWAS_cytokines"/*; do
 
     echo "Creating .sumstats file for: $file"
@@ -31,6 +31,7 @@ for file in "$significant_singleGWAS_cytokines"/*; do
     # Output filename
     output_filename="../output_wrangling/output_${extracted_part}"
 
+    # Command
     Rscript "../HDL/HDL.data.wrangling.R" \
     gwas.file="$file" \
     LD.path=../reference_panels_hdl/UKB_array_SVD_eigen90_extraction \

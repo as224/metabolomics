@@ -1,3 +1,5 @@
+# Generates tsv files from the HDL output files to generate heatmaps and networks later on
+
 # Load required libraries
 #install.packages("readtext")
 library("readtext")
@@ -8,49 +10,50 @@ library(data.table)
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
-#output_hdl_path <- "../output_hdl"
-output_hdl_path <- "../large_gwas/output_hdl"
+output_hdl_path <- "../output_hdl"
 
 # Function that generates tsv from log and adds cols (p1_id, p2_id, id and method)
-#' Title
-#'
-#' @param input 
-#'
-#' @return
-#' @export
-#'
-#' @examples
 generate_df <- function(input) {
   log <- readLines(input)
   
   column_names <- c("p1", "p2", "rg", "p", "p1_id", "p2_id")
   
   # Create an empty data frame with known column names
-  df <- data.frame(matrix(ncol = length(column_names), nrow = 1))
+  df <- data.frame(matrix(ncol = length(column_names), nrow = 2))
   colnames(df) <- column_names
   
   for (line in log) {
     # Get gwas1 path
     if (grepl("^gwas1\\.df=", line)) {
-      df$p1[1] <- sub("^gwas1\\.df=", "../", line)
-      df$p1_id[1] <- sub("^.*/output_wrangling_hdl/", "", gsub(".hdl.rds$", "", df$p1[1]))
+      df$p1[1] <- sub("^gwas1\\.df=", "", line)
+      df$p1_id[1] <- sub("^.*/output_wrangling/output_", "", gsub(".hdl.rds$", "", df$p1[1]))
     }
     
     # Get gwas2 path
     if (grepl("^gwas2\\.df=", line)) {
-      df$p2[1] <- sub("^gwas2\\.df=", "../", line)
-      df$p2_id[1] <- sub("^.*/output_wrangling_hdl/", "", gsub(".hdl.rds$", "", df$p2[1]))
+      df$p2[1] <- sub("^gwas2\\.df=", "", line)
+      df$p2_id[1] <- sub("^.*/output_wrangling/output_", "", gsub(".hdl.rds$", "", df$p2[1]))
     }
     
     # Get genetic covariance 
     if (grepl("^Genetic Correlation:", line)) {
-      df$rg <- sub("^Genetic Correlation:\\s+(-?\\d+\\.\\d+).*", "\\1", line)
+      df$rg[1] <- sub("^Genetic Correlation:\\s+(-?\\d+\\.\\d+).*", "\\1", line)
     }
     
     # Get p value
     if (grepl("^P:", line)) {
-      df$p <- sub("^P:", "", line)
+      df$p[1] <- sub("^P:", "", line)
     }
+    
+    #print(df)
+    
+    # Add inverted pair to df (p2/p1)
+    df$p1[2] <- df$p2[1]
+    df$p2[2] <- df$p1[1]
+    df$rg[2] <- df$rg[1]
+    df$p[2] <- df$p[1]
+    df$p1_id[2] <- df$p2_id[1]
+    df$p2_id[2] <- df$p1_id[1]
   }
   
   # Add two cols to df
@@ -61,16 +64,13 @@ generate_df <- function(input) {
   df$rg <- as.numeric(df$rg)
   df$rg[is.na(df$rg)] <- 0
   
-  # Add FDR 
-  df$q <- p.adjust(df$p, method = "fdr")
-  
   # Return the df
   return(df)
 }
 
 # Initialize an empty data frame without specifying the number of rows
-df_all <- data.frame(matrix(ncol = 9, nrow=0))
-colnames(df_all) <- c("p1", "p2", "rg", "se", "p",  "p1_id", "p2_id", "id", "method")
+df_all <- data.frame(matrix(ncol = 10, nrow=0))
+colnames(df_all) <- c("p1", "p2", "rg", "se", "p",  "p1_id", "p2_id", "id", "method", "q")
 
 files <- list.files(path = output_hdl_path, pattern = "\\.Rout$", full.names = TRUE)
 
@@ -84,15 +84,37 @@ for (file in files) {
   df_all <- rbind(df_all, df)
 }
 
-print(df_all)
-class(df_all$p1)
+# Add diagonal pairs (hdl(gwas1,gwas1)) to df_all
+for (element in unique(df_all$p1)) {
+  id <- sub("^.*/output_wrangling/output_", "", gsub(".hdl.rds$", "", element))
+  id_id <- paste(id, "/", id, sep = "")
+  new_row <- c(element, element, 1, NA, id, id, id_id, "hdl", NA)
+  
+  df_all <- rbind(df_all, new_row)
+}
 
-# Adjust the correlation values -> >1=0 and <-1=0 (the highest correlation (diagnoal values) is one -> thus a higher value than 1 explains something weird and also <-1)
-df_all_adjusted <- df_all  
+# Adjust the correlation values -> >1=0 and <-1=0 (the highest correlation (diagonal values) is one -> thus a higher value than 1 explains something weird and also <-1)
+df_all_adjusted <- df_all
+df_all$rg <- as.numeric(df_all$rg) 
+df_all_adjusted$rg <- as.numeric(df_all_adjusted$rg)
 df_all_adjusted$rg[df_all$rg > 1] <- 0
 df_all_adjusted$rg[df_all$rg < -1] <- 0
+df_all_adjusted$p <- as.numeric(df_all_adjusted$p)
+df_all_adjusted$q <- p.adjust(df_all_adjusted$p, method = "fdr")
 
-# Create a matrix containing all correlation values (with adjusted correlation values -> >1, <-1 handeled)
+# Dataframe with corrected and significant p-values
+df_all_adjusted_significant <- df_all_adjusted[df_all_adjusted$p < 0.05 & !(is.na(df_all_adjusted$p)), ]
+
+# Add the diagonal 1 values for left significant gwas
+for (element in unique(df_all_adjusted_significant$p1)) {
+  id <- sub("^.*/output_wrangling/output_", "", gsub(".hdl.rds$", "", element))
+  id_id <- paste(id, "/", id, sep = "")
+  new_row <- c(element, element, 1, NA, id, id, id_id, "hdl", NA)
+  
+  df_all_adjusted_significant <- rbind(df_all_adjusted_significant, new_row)
+}
+
+# Create a matrix containing all correlation values (with adjusted correlation values -> >1, <-1 handled)
 
 df_aggregated <- df_all_adjusted %>%
   group_by(p1_id, p2_id) %>%
@@ -122,8 +144,27 @@ rownames(matrix_df_woCorrection) <- row_names
 
 matrix_df_woCorrection <- as.matrix(matrix_df_woCorrection)
 
+# Create a matrix containing all adjusted correlation values (with corrected gc and significant p-values)
+
+df_aggregated_all_sign <- df_all_adjusted_significant %>%
+  group_by(p1_id, p2_id) %>%
+  summarise(rg = first(rg)) %>%
+  ungroup()
+
+matrix_df_correction_sign <- spread(df_aggregated_all_sign, key = p1_id, value = rg)
+
+row_names <- matrix_df_correction_sign$p2_id
+matrix_df_correction_sign$p2_id <- NULL
+matrix_df_correction_sign[] <- lapply(matrix_df_correction_sign, as.numeric) # Convert dataframe to numeric
+matrix_df_correction_sign[is.na(matrix_df_correction_sign)] <- 0 # Replace NA values with 0
+rownames(matrix_df_correction_sign) <- row_names
+
+matrix_df_correction_sign <- as.matrix(matrix_df_correction_sign)
+
 # Save all created df's and matrices 
-write.table(df_all, file = paste(output_hdl_path, "/complete_df.tsv", sep="") , sep = "\t", row.names = FALSE, quote=FALSE)
-write.table(df_all_adjusted, file = paste(output_hdl_path, "/complete_df_adjusted.tsv", sep="") , sep = "\t", row.names = FALSE, quote=FALSE)
-write.table(matrix_df, file = paste(output_hdl_path, "/matrix_df.tsv", sep=""), row.names = TRUE, quote=FALSE)
-write.table(matrix_df_woCorrection, file = paste(output_hdl_path, "/matrix_df_woCorrection.tsv", sep=""), row.names = TRUE, quote=FALSE)
+write.table(df_all, file = paste(output_hdl_path, "/complete_df_hdl.tsv", sep="") , sep = "\t", row.names = FALSE, quote=FALSE)
+write.table(df_all_adjusted, file = paste(output_hdl_path, "/complete_df_adjusted_hdl.tsv", sep="") , sep = "\t", row.names = FALSE, quote=FALSE)
+write.table(df_all_adjusted_significant, file = paste(output_hdl_path, "/df_all_adjusted_significant_hdl.tsv", sep=""), sep="\t", row.names=FALSE, quote=FALSE)
+write.table(matrix_df, file = paste(output_hdl_path, "/matrix_df_hdl.tsv", sep=""), sep="\t", row.names = TRUE, quote=FALSE)
+write.table(matrix_df_woCorrection, file = paste(output_hdl_path, "/matrix_df_woCorrection_hdl.tsv", sep=""), sep="\t", row.names = TRUE, quote=FALSE)
+write.table(matrix_df_correction_sign, file = paste(output_hdl_path, "/matrix_df_correction_sign_hdl.tsv", sep=""), sep="\t", row.names=TRUE, quote=FALSE)
