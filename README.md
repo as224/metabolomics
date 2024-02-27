@@ -8,3 +8,5 @@ The LD Score Regression method, designed to estimate heritability and genetic co
 In our analysis, we applied their algorithm to 67 GWAS studies. The list of their ID's can be found at /input_files/GWAS_ids.tsv. To maintain the proper folder structure in your cloned GitHub repository, please clone their GitHub into our main repository with the following structure: metabolomics/ldsc.
 
 Below one can familiarize with our workflow for utilizing LDSC and HDL. It is crucial to follow these steps in order to reproduce our results.
+
+[Download PDF](workflow_ldsc_hdl.pdf)
