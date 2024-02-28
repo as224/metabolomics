@@ -11,34 +11,64 @@ The main goal of this project is exploring genetic correlations and molecular ov
 6. [Workflow of LDSC and HDL](#workflow-ldsc-hdl)
 
 ## Harmonization <a name="harmonize"></a>
-The main objective here is to ensure a consistent format for the GWAS studies utilized in the subsequent analytical procedures. Consequently, the availability of the necessary values is guaranteed.
+The main objective here is to ensure a consistent format for the GWAS studies utilized in the subsequent analytical procedures. Consequently, the availability of the necessary values is guaranteed. 
 
-### Requirements:
+### Requirements and Workflow:
+The chosen GWAS study that is harmonized, should contain the follwing values for all investigated Single Nucleotide Polymorphisms (SNPs):
+- SNP ID
+- Chromosome on which the SNP is located
+- Genomic Position or base pair coordinate, preferably on assembly GRCH38 (otherwise, transformation is later possible)
+- Effect allele
+- Non-effect-allele
+- Effect Allele Frequency (EAF), representing the frequency of the effect allele in the population
+- Effect direction or beta effect
+- Odds Ratio (OR), representing the association between the SNP and the trait
+- Standard Error (SE)
+- P-value
+- Investigated trait or phenotype
+- Sample size of the study
 
-### 1. Harmonize.sh
-Command: bash harmonize.sh -i gwas -t trait [--pvalue] [--bed] [--eaf] 
 
-Parameters: 
+Starting, run Harmonize.sh. Here, adapt the script to the available columns of the GWAS file. The resulting TSV contains the necessary columns in the needed format. 
+
+
+If the data is from an earlier assembly, the tool "LiftOver" can be used for transformation. For that, add the --bed parameter, and the script generates the necessary input file for LiftOver. Following, the LiftOver results are merged with the origin file to obtain the new positions: 
+awk -F"\t" 'FNR==NR{a[$4]=$2; next}{print $1"\t"$2"\t"a[$1]"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}' liftOverResult.bed resultHarmonize.tsv > result.final 
+
+Furthermore, the script can filter p-values and SNPs with unavailable EAFs if needed. 
+
+Following, run 2_merger_colnames.pl with the resulting file. This script switches the effect and non-effect alleles if the EAF is over 0.5 and adapts the EAF, beta effect, and odds ratio (OR) accordingly. If dbSNP is available, allele frequencies and/or the Minor Allele Frequency (MAF) can be added. 
+
+### Scripts:
+
+#### 1. Harmonize.sh
+Command: bash harmonize.sh -i gwas -t trait [--pvalue] [--bed] [--eaf]
+
+
+Parameters:
 - -i: The GWAS study that is harmonized (in gzip format)
 - -t: the studied trait
 - --pvalue: include, if SNPs with a p-value >= 0.05 should be excluded
 - --bed: include, if a .bed file should be created
-- --eaf: include, if invalid EAFs should be filtered
+- --eaf: include, if invalid EAFs (NA or “.”) should be filtered
 
-### 2. 2_merger_colnames.pl
-Command: perl 2_merger_colnames.pl  resulting_SH_file  dbsnp output_file
 
-Parameters: 
+#### 2. 2_merger_colnames.pl
+Command: perl 2_merger_colnames.pl resulting_SH_file dbsnp output_file
+
+
+Parameters:
 - resulting_SH_file: output file of bring_to_gwascatalog_format.sh
--	dbsnp: theoretically, here, dbsnp files can be used to add allele frequency from dbSNP to the study file and/or fix MAF in case it was provided.
--	output_file: output directory
+- dbsnp: theoretically, here, dbsnp files can be used to add allele frequency from dbSNP to the study file and/or fix MAF in case it was provided.
+- output_file: output directory
 
 
-### 3. other scripts
-- bring_to_gwascatalog_format.sh: 
-- preprocess.sh:
+
+#### 3. other scripts
+- bring_to_gwascatalog_format.sh: Second origin script for the second steps of Harmonization while creating the .bed files.
+- preprocess.sh: First Origin script for the first step of the Harmonization
 - filter_pval.py: alternative script for p-value filtering
-- filter_EAF.py: used during Harmonization if --pvalue is added
+- filter_EAF.py: used during Harmonization if --pvalue is added, filters SNPs that have an invalid EAF
 
 
 
