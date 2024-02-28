@@ -134,11 +134,17 @@ rownames(matrix_df_correction_sign) <- row_names
 
 
 matrix_df_correction_sign <- as.matrix(matrix_df_correction_sign)
+diag_vals_sign <- diag(as.matrix(matrix_df_correction_sign))
+matrix_corr_sign_ldsc_diagfiltered <- matrix_df_correction_sign[diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005, diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005]
+
+rownames_matrix_corr_sign_ldsc_diagfiltered <- rownames(matrix_corr_sign_ldsc_diagfiltered)
+df_all_adjusted_significant_diagfiltered_ldsc <- df_all_adjusted_significant[df_all_adjusted_significant$p1_id %in% rownames_matrix_corr_sign_ldsc_diagfiltered, ]
+
 
 # Save all created df's and matrices 
 write.table(df_all, file = paste(output_ld_regression_path, "/complete_df_ldsc.tsv", sep="") , sep = "\t", row.names = FALSE, quote=FALSE)
 write.table(df_all_adjusted, file = paste(output_ld_regression_path, "/complete_df_adjusted_ldsc.tsv", sep="") , sep = "\t", row.names = FALSE, quote=FALSE)
 write.table(matrix_df, file = paste(output_ld_regression_path, "/matrix_df_ldsc.tsv", sep=""), sep="\t", row.names = TRUE, quote=FALSE)
 write.table(matrix_df_woCorrection, file = paste(output_ld_regression_path, "/matrix_df_woCorrection_ldsc.tsv", sep=""), sep="\t", row.names = TRUE, quote=FALSE)
-write.table(matrix_df_correction_sign, file = paste(output_ld_regression_path, "/matrix_df_correction_sign_ldsc.tsv", sep=""), sep="\t", row.names=TRUE, quote=FALSE)
-write.table(df_all_adjusted_significant, file=paste(output_ld_regression_path, "/df_all_adjusted_significant_ldsc.tsv", sep=""), sep="\t", row.names=FALSE, quote=FALSE)
+write.table(matrix_corr_sign_ldsc_diagfiltered, file = paste(output_ld_regression_path, "/matrix_df_correction_sign_ldsc.tsv", sep=""), sep="\t", row.names=TRUE, quote=FALSE)
+write.table(df_all_adjusted_significant_diagfiltered_ldsc, file=paste(output_ld_regression_path, "/df_all_adjusted_significant_ldsc.tsv", sep=""), sep="\t", row.names=FALSE, quote=FALSE)

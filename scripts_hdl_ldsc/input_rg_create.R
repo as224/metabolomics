@@ -121,8 +121,17 @@ df_hdl <- subset(df_hdl, select = c("p1_category", "p1", "p2_category", "p2", "r
 df_ldsc <- df_ldsc[df_ldsc$rg != 0, ] 
 df_hdl <- df_hdl[df_hdl$rg != 0, ] 
 
+# Create a dataframe where q is not relevant 
+df_ldsc_fdrNotRelevant <- df_ldsc
+df_ldsc_fdrNotRelevant$q <- 0
+
+df_hdl_fdrNotRelevant <- df_hdl
+df_hdl_fdrNotRelevant$q <- 0
+
 # Save as txt files 
-write.table(df_ldsc, file = paste(folder_path_ldsc, "/input_rg_ldsc.txt", sep=""), sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
-write.table(df_hdl, file = paste(folder_path_hdl, "/input_rg_hdl.txt", sep=""), sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+write.table(df_ldsc, file = paste(folder_path_ldsc, "/input_rg_fdrRelevant_ldsc.txt", sep=""), sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+write.table(df_ldsc_fdrNotRelevant, file = paste(folder_path_ldsc, "/input_rg_fdrNotRelevant_sameAsHeatmap_ldsc.txt", sep=""), sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+write.table(df_hdl, file = paste(folder_path_hdl, "/input_rg_fdrRelevant_hdl.txt", sep=""), sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+write.table(df_hdl_fdrNotRelevant, file = paste(folder_path_hdl, "/input_rg_fdrNotRelevant_sameAsHeatmap_hdl.txt", sep=""), sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
 
