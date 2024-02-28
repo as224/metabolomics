@@ -56,9 +56,6 @@ if (!dir.exists(folder_heatmaps_hdl)) {
 matrix_ldsc <- read.table(paste(folder_path_ldsc, "/matrix_df_ldsc.tsv", sep=""), header=TRUE)
 matrix_woCorrection_ldsc <- read.table(paste(folder_path_ldsc, "/matrix_df_woCorrection_ldsc.tsv", sep=""), header=TRUE)
 matrix_corr_sign_ldsc <- read.table(paste(folder_path_ldsc, "/matrix_df_correction_sign_ldsc.tsv", sep=""), header=TRUE)
-# filter out GWAS studies where diag=0 of matrix_corr_sign_ldsc 
-diag_vals_sign <- diag(as.matrix(matrix_corr_sign_ldsc))
-matrix_corr_sign_ldsc_diagfiltered <- matrix_corr_sign_ldsc[diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005, diag_vals_sign >= 0.995 & diag_vals_sign <= 1.005]
 
 # Read HDL files
 matrix_hdl <- read.table(paste(folder_path_hdl, "/matrix_df_hdl.tsv", sep=""), header=TRUE)
