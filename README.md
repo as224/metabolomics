@@ -43,8 +43,8 @@ Parameters:
 
 
 ## LDSC <a name="LDSC-overall"></a>
-The LD Score Regression method, designed to estimate heritability and genetic correlation between different GWAS summary statistics, is implemented as a tool. The main repository for it can be found here: [https://github.com/bulik/ldsc](https://github.com/bulik/ldsc).
-In our analysis, we applied their algorithm to 67 GWAS studies. The list of their ID's can be found at /input_files/GWAS_ids.tsv. 
+The LD Score Regression method, designed to estimate heritability and genetic correlation between different GWAS summary statistics, is implemented as a tool. The main repository for it can be found here: [https://github.com/bulik/ldsc](https://github.com/bulik/ldsc). There one can also find the necessary packages and versions in order to run ldsc. The original paper is linked here [LD Score regression distinguishes confounding from polygenicity in genome-wide association studies](https://doi.org/10.1038/ng.3211).
+In our analysis, we applied their algorithm to 67 GWAS studies. The list of their ID's can be found at `input_files/GWAS_ids.tsv`. 
 
 ### Setup Instructions for LDSC <a name="setup-instructions-ldsc"></a>
 
@@ -56,7 +56,7 @@ Please create a new folder named "single_GWAS_cytokines" where you will store al
 
 #### 2. Download GWAS Studies
 
-Download all the desired GWAS studies and save them as input files in the "input_files" folder. The filenames should adhere to the following structure:
+Download all the desired GWAS studies and save them as input files in the `metabolomics/input_files` folder. The filenames should adhere to the following structure:
 
 - **File Naming Convention**: pmid00000000_XX_eur.tsv
   - `pmid00000000`: Replace zeros with the specific PubMed ID number of the study.
@@ -69,15 +69,15 @@ For example:
 
 #### 3. Download Additional Files
 
-In the "input_files" folder, also download the following files from the provided sources:
+In the `metabolomics/input_files` folder, also download the following files from the provided sources:
 
 - **w_hm3.snplist:**
   - Download from: [w_hm3.snplist](https://ibg.colorado.edu/cdrom2021/Day06-nivard/GenomicSEM_practical/eur_w_ld_chr/w_hm3.snplist)
-  - Save in the "input_files" folder.
+  - Save in `metabolomics/input_files`
 
 - **eur_w_ld_chr Folder:**
   - Download from: [eur_w_ld_chr Folder](https://zenodo.org/records/8182036)
-  - Save the entire folder "eur_w_ld_chr" in the "input_files" folder.
+  - Save the entire folder here, that the structure looks like that: `metabolomics/input_files/eur_w_ld_chr`
 
 #### 4. Clone the Proper LDSC GitHub Repository
 
@@ -88,8 +88,8 @@ Following these steps will organize the data effectively for using this reposito
 
 ## HDL <a name="HDL-overall"></a>
 As an extension to LDSC, the High-Definition Likelihood (HDL) method was developed to enhance precision in estimating genetic correlations. The tool generates summary statistics for input GWAS files and calculates the genetic correlation between GWAS pairs. 
-For a more comprehensive understanding of the tool, detailed information can be found on the associated GitHub repository: [https://github.com/zhenin/HDL](https://github.com/zhenin/HDL).
-In our analysis, we also employed the HDL method to the 67 GWAS studies mentioned above. (/input_files/GWAS_ids.tsv)
+For a more comprehensive understanding of the tool, detailed information can be found on the associated GitHub repository: [https://github.com/zhenin/HDL](https://github.com/zhenin/HDL). The original paper is linked here [High-definition likelihood inference of genetic correlations across human complex traits](https://doi.org/10.1038/s41588-020-0653-y).
+In our analysis, we also employed the HDL method to the 67 GWAS studies mentioned above. `input_files/GWAS_ids.tsv`
 
 ### Setup Instructions for HDL <a name="setup-instructions-hdl"></a>
 
@@ -101,11 +101,11 @@ Follow the instructions in steps 1 and 2 at [Setup Instructions for LDSC](#setup
 
 #### 2. Download Additional Files
 
-In the "input_files" folder, also download the following folder from the provided source:
+In the `metabolomics/input_files` folder, also download the following folder from the provided source:
 
 - **UKB_array_SVD_eigen90_extraction Folder:**
   - Download from: [UKB_array_SVD_eigen90_extraction](https://www.dropbox.com/s/fuvpwsf6r8tjd6c/UKB_array_SVD_eigen90_extraction.tar.gz?dl=0)
-  - Save the entire folder "UKB_array_SVD_eigen90_extraction" in the "input_files" folder.
+  - Save the entire folder "UKB_array_SVD_eigen90_extraction" in the `metabolomics/input_files` folder.
   - You can use another refence panel here, if needed. Just adjust the path in run_wrangling.R and run_hdl.R.
 
 #### 3. Clone the Proper HDL GitHub Repository
