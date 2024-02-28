@@ -6,7 +6,7 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # The traitlist for hdl and ldsc is the same. Here I take the unique IDs from ldsc output but one can also take that from hdl output.
 folder_path = "../output_ld_regression"
-df_pre_trait <- read.table(paste(folder_path, "/complete_df_adjusted.tsv", sep=""), header=TRUE)
+df_pre_trait <- read.table(paste(folder_path, "/complete_df_adjusted_ldsc.tsv", sep=""), header=TRUE)
 
 # Get unique values from df_pre_trait$p1_id
 unique_p1_id <- unique(df_pre_trait$p1_id)
@@ -74,7 +74,9 @@ trait_category_mapping <- c("IL" = "Cytokine",
                             "pyruvate" = "Other",
                             "citrate" = "Other",
                             "urea" = "Other",
-                            "glycerol" = "Other")
+                            "glycerol" = "Other",
+                            "T2d" = "Autoimmune",
+                            "LBD" = "Inflammatory")
 
 for (key in names(trait_category_mapping)) {
   # Find indices where TRAIT starts with the key
@@ -86,12 +88,12 @@ for (key in names(trait_category_mapping)) {
 
 
 
-df_trait$COLOR <- ifelse(startsWith(df_trait$CATEGORY, "Cytokine"), "coral", 
+df_trait$COLOR <- ifelse(startsWith(df_trait$CATEGORY, "Cytokine"), "red", 
                          ifelse(startsWith(df_trait$CATEGORY, "Protein"), "lightgreen", 
                                 ifelse(startsWith(df_trait$CATEGORY, "Autoimmune"), "lightblue", 
                                        ifelse(startsWith(df_trait$CATEGORY, "Inflammatory"), "violet",
                                               ifelse(startsWith(df_trait$CATEGORY, "Aminoacid"), "lightpink",
-                                                     "aquamarine")))))
+                                                     "white")))))
 
 df_trait <- subset(df_trait, select = c("CATEGORY", "TRAIT", "COLOR"))
 
