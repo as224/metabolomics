@@ -1,0 +1,33 @@
+Function arguments:
+gwas1.df=../output_wrangling/output_pmid27989323_IL1ra_eur.hdl.rds
+gwas2.df=../output_wrangling/output_pmid33987465_PD_eur.hdl.rds
+LD.path=../reference_panels_hdl/UKB_array_SVD_eigen90_extraction
+output.file=../output_hdl/output_pmid27989323_IL1ra_eur_output_pmid33987465_PD_eur.raw.gwas.Rout
+numCores=4
+
+HDL: High-definition likelihood inference of genetic correlations and heritabilities (HDL)
+Version 1.4.0 (2021-04-15) installed
+Author: Zheng Ning, Xia Shen
+Maintainer: Zheng Ning <zheng.ning@ki.se>
+Tutorial: https://github.com/zhenin/HDL
+Use citation("HDL") to know how to cite this work.
+
+Analysis starts on Sat Feb 24 14:25:40 2024 
+0  SNPs were removed in GWAS 1 due to missing N or missing test statistic.  
+0  SNPs were removed in GWAS 2 due to missing N or missing test statistic.  
+297876 out of 307519 (96.86%) SNPs in reference panel are available in GWAS 1.  
+304998 out of 307519 (99.18%) SNPs in reference panel are available in GWAS 2.  
+Warning: More than 1% SNPs in reference panel are missed in GWAS 1. This may generate bias in estimation. Please make sure that you are using correct reference panel.  
+
+Integrating piecewise results 
+Continuing computing standard error with jackknife 
+
+
+Heritability of phenotype 1:  0.0115 (0.0915) 
+Heritability of phenotype 2:  1 (0.00e+00) 
+Genetic Covariance:  -0.3481 (0.1271) 
+Genetic Correlation:  -3.2439 (3.1981) 
+P:  3.10e-01 
+
+Analysis finished at Sat Feb 24 14:26:30 2024 
+The results were saved to ../output_hdl/output_pmid27989323_IL1ra_eur_output_pmid33987465_PD_eur.raw.gwas.Rout

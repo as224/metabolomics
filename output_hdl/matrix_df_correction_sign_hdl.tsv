@@ -1,0 +1,12 @@
+pmid27455348_ALS_eur	pmid27989323_eotaxin_eur	pmid27989323_IL12p70_eur	pmid27989323_IL1ra_eur	pmid27989323_ip10_eur	pmid27989323_MCP1_eur	pmid27989323_MIF_eur	pmid27989323_MIP1b_eur	pmid27989323_TRAIL_eur	pmid29566793_ALS_eur	pmid33987465_PD_eur
+pmid27455348_ALS_eur	1	0	0	0	0	0	0	0	0	0.8169	0
+pmid27989323_eotaxin_eur	0	1	0	0	0	0	0	0	0	0	0
+pmid27989323_IL12p70_eur	0	0	1	0	0	0	0	0	0	0	0
+pmid27989323_IL1ra_eur	0	0	0	1	0	0	0	0	0	0	0
+pmid27989323_ip10_eur	0	0	0	0	1	0	0	0	0	0	0
+pmid27989323_MCP1_eur	0	0	0	0	0	1	0	0	0	0	0
+pmid27989323_MIF_eur	0	0	0	0	0	0	1	0	0	0	0
+pmid27989323_MIP1b_eur	0	0	0	0	0	0	0	1	0	0	0
+pmid27989323_TRAIL_eur	0	0	0	0	0	0	0	0	1	0	0
+pmid29566793_ALS_eur	0.8169	0	0	0	0	0	0	0	0	1	0
+pmid33987465_PD_eur	0	0	0	0	0	0	0	0	0	0	1
