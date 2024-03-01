@@ -33,7 +33,9 @@ Starting, run Harmonize.sh. Here, adapt the script to the available columns of t
 
 
 If the data is from an earlier assembly, the tool "LiftOver" can be used for transformation. For that, add the --bed parameter, and the script generates the necessary input file for LiftOver. Following, the LiftOver results are merged with the origin file to obtain the new positions: 
-awk -F"\t" 'FNR==NR{a[$4]=$2; next}{print $1"\t"$2"\t"a[$1]"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}' liftOverResult.bed resultHarmonize.tsv > result.final 
+```bash
+awk -F"\t" 'FNR==NR{a[$4]=$2; next}{print $1"\t"$2"\t"a[$1]"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}' liftOverResult.bed resultHarmonize.tsv > result.final
+```
 
 Furthermore, the script can filter p-values and SNPs with unavailable EAFs if needed. 
 
