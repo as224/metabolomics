@@ -44,7 +44,9 @@ Following, run 2_merger_colnames.pl with the resulting file. This script switche
 ### Scripts:
 
 #### 1. Harmonize.sh
-Command: bash harmonize.sh -i gwas -t trait [--pvalue] [--bed] [--eaf]
+```bash
+bash harmonize.sh -i gwas -t trait [--pvalue] [--bed] [--eaf]
+```
 
 
 Parameters:
@@ -56,7 +58,9 @@ Parameters:
 
 
 #### 2. 2_merger_colnames.pl
-Command: perl 2_merger_colnames.pl resulting_SH_file dbsnp output_file
+```perl
+perl 2_merger_colnames.pl resulting_SH_file dbsnp output_file
+```
 
 
 Parameters:
@@ -67,10 +71,10 @@ Parameters:
 
 
 #### 3. other scripts
-- bring_to_gwascatalog_format.sh: Second origin script for the second steps of Harmonization while creating the .bed files.
-- preprocess.sh: First Origin script for the first step of the Harmonization
-- filter_pval.py: alternative script for p-value filtering
-- filter_EAF.py: used during Harmonization if --pvalue is added, filters SNPs that have an invalid EAF
+- `scripts_harmonize/bring_to_gwascatalog_format.sh`: Second origin script for the second steps of Harmonization while creating the .bed files.
+- `scripts_harmonize/preprocess.sh`: First Origin script for the first step of the Harmonization
+- `scripts_harmonize/filter_pval.py`: alternative script for p-value filtering
+- `scripts_harmonize/filter_EAF.py`: used during Harmonization if --pvalue is added, filters SNPs that have an invalid EAF
 
 
 
