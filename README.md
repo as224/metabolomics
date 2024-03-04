@@ -9,6 +9,10 @@ The main goal of this project is exploring genetic correlations and molecular ov
 4. [HDL](#HDL-overall)
 5. [Setup Instructions for HDL](#setup-instructions-hdl)
 6. [Workflow of LDSC and HDL](#workflow-ldsc-hdl)
+7. [HyPrColoc](#hyprcoloc)
+9. [Setup Instructions for HyPrColoc](#setup-hyprcoloc)
+8. [Workflow of HyPrColoc](#workflow-hyprcoloc)
+
 
 ## Harmonization <a name="harmonize"></a>
 The main objective here is to ensure a consistent format for the GWAS studies utilized in the subsequent analytical procedures. Consequently, the availability of the necessary values is guaranteed. 
@@ -158,12 +162,29 @@ The following figure describes our workflow for utilizing the LDSC and HDL appro
 
 ![Alt text](https://github.com/as224/metabolomics/blob/main/workflow_ldsc_hdl.png "Workflow LDSC and HDL")
 
-## HyPrColoc
+## HyPrColoc <a name="hyprcoloc"></a>
 HyPrColoc (Hypothesis Prioritization in multi-trait Colocalization) was developed to identify casual genes and retrieve clusters of colocalized traits using an efficient deterministic Bayesian algorithm for summary statistics of GWAS across a large number of traits. Further details to find in the [A fast and efficient colocalization algorithm for identifying shared genetic risk factors across multiple traits](https://www.nature.com/articles/s41467-020-20885-8).  More information about the needed packages and the source code for the tool can be found here [https://github.com/cnfoley/hyprcoloc](https://github.com/cnfoley/hyprcoloc). A detailed guide to explore all features of HyPrColoc will automatically be opened while installing running the line `browseVignettes("hyprcoloc")`. Superset of analyzed GWAS studies can be found in `input_files/GWAS_ids.tsv`.
 
-### Setup Instructions for HyPrColoc
+### Setup Instructions for HyPrColoc <a name="setup-hyprcoloc"></a>
 1. Copy the scripts from `metabolomics/scripts_hyprcoloc` into your R workspace
 2. Create a folder named "Harmonized GWAS results" in your R workspace
 3. Create at least one of the following subfolders in "Harmonized GWAS results"
    + "metabolites", "full_unfiltered", "cytokines_new"
 4. Download harmonized GWAS you want to analyze and distribute in any proprtion among created subfolders
+
+Note: You can name the subfolders in step 3 different but then you also have to update the path in the script "complete_pipeline.R" line 17-19
+```R
+cytokines_directory <- "Harmonized GWAS results/renamed_subfolder1"
+single_GWAS_directory <- "Harmonized GWAS results/renamed_subfolder2"
+metabolite_directory <- "Harmonized GWAS results/renamed_subfolder3"
+```
+
+### Workflow of HyPrColoc <a name="workflow-hyprcoloc"></a>
+1. Run the script "custom_function.R"
+2. Change the variable trait_groups_of_interest in the script "complete_pipeline.R"
+3. Run "complete_pipeline.R"
+
+Details for step 2: The variable is a list of Subsets containing the names of the files without the suffix beginning with the dot. Two example subsets for these example files "pmid1234_abc_xyz.tsv.gz", "pmid456_def_uvw.tsv.gz", "pmid789_ghi_omn.tsv.gz" would be written as 
+```R
+trait_groups_of_interest <- list(list(pmid1234_abc_xyz, pmid789_ghi_omn), list(pmid1234_abc_xyz, pmid456_def_uvw, pmid789_ghi_omn))
+```
