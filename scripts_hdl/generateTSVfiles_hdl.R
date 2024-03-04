@@ -12,6 +12,11 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 output_hdl_path <- "../output_hdl"
 
+pos_inf_counter <- 0
+neg_inf_counter <- 0
+numeric_counter_inside <- 0
+numeric_counter_outside <- 0
+
 # Function that generates tsv from log and adds cols (p1_id, p2_id, id and method)
 generate_df <- function(input) {
   log <- readLines(input)
@@ -45,7 +50,7 @@ generate_df <- function(input) {
       df$p[1] <- sub("^P:", "", line)
     }
     
-    #print(df)
+    #print(df$rg[1])
     
     # Add inverted pair to df (p2/p1)
     df$p1[2] <- df$p2[1]
@@ -54,11 +59,33 @@ generate_df <- function(input) {
     df$p[2] <- df$p[1]
     df$p1_id[2] <- df$p2_id[1]
     df$p2_id[2] <- df$p1_id[1]
+    
   }
   
   # Add two cols to df
   df$id <- paste(df$p1_id, df$p2_id, sep = "/")
   df$method <- rep("hdl", nrow(df))
+  
+  # Count calculated rg Infs, -Infs, and numeric values (inside/outside [-1,1])
+  if (startsWith(df$rg[1], "Genetic Correlation:  Inf")) {
+    pos_inf_counter <<- pos_inf_counter+1 
+  }
+  else if (startsWith(df$rg[1], "Genetic Correlation:  -Inf")) {
+    neg_inf_counter <<- neg_inf_counter+1 
+  }
+  else if (grepl("^-?\\d+\\.?\\d*$", df$rg[1])) {
+    # Inside interval
+    if (as.numeric(df$rg[1]) >= -1 && as.numeric(df$rg[1]) <= 1) {
+      numeric_counter_inside <<- numeric_counter_inside+1
+    }
+    # Outside interval
+    else {
+      numeric_counter_outside <<- numeric_counter_outside+1
+    }
+  }
+  # else {
+  #   print(df$rg[1])
+  # }
   
   # Replace NA with 0 for genetic correlation 
   df$rg <- as.numeric(df$rg)
@@ -160,6 +187,12 @@ matrix_df_correction_sign[is.na(matrix_df_correction_sign)] <- 0 # Replace NA va
 rownames(matrix_df_correction_sign) <- row_names
 
 matrix_df_correction_sign <- as.matrix(matrix_df_correction_sign)
+
+# Print the amount of Infs, -Infs, genetic correlations outside [-1,1] and inside [-1,1]
+print(paste("Amount of GWAS pairs with rg of Inf:", pos_inf_counter))
+print(paste("Amount of GWAS pairs with rg of -Inf:", neg_inf_counter))
+print(paste("Amount of GWAS pairs with rg outside [-1,1]:", numeric_counter_outside))
+print(paste("Amount of GWAS pairs with rg inside [-1,1]:", numeric_counter_inside))
 
 # Save all created df's and matrices 
 write.table(df_all, file = paste(output_hdl_path, "/complete_df_hdl.tsv", sep="") , sep = "\t", row.names = FALSE, quote=FALSE)
