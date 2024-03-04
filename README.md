@@ -158,4 +158,12 @@ The following figure describes our workflow for utilizing the LDSC and HDL appro
 
 ![Alt text](https://github.com/as224/metabolomics/blob/main/workflow_ldsc_hdl.png "Workflow LDSC and HDL")
 
+## HyPrColoc
+HyPrColoc (Hypothesis Prioritization in multi-trait Colocalization) was developed to identify casual genes and retrieve clusters of colocalized traits using an efficient deterministic Bayesian algorithm for summary statistics of GWAS across a large number of traits. Further details to find in the [A fast and efficient colocalization algorithm for identifying shared genetic risk factors across multiple traits](https://www.nature.com/articles/s41467-020-20885-8).  More information about the needed packages and the source code for the tool can be found here [https://github.com/cnfoley/hyprcoloc](https://github.com/cnfoley/hyprcoloc). A detailed guide to explore all features of HyPrColoc will automatically be opened while installing running the line `browseVignettes("hyprcoloc")`. Superset of analyzed GWAS studies can be found in `input_files/GWAS_ids.tsv`.
 
+### Setup Instructions for HyPrColoc
+1. Copy the scripts from `metabolomics/scripts_hyprcoloc` into your R workspace
+2. Create a folder named "Harmonized GWAS results" in your R workspace
+3. Create at least one of the following subfolders in "Harmonized GWAS results"
+   + "metabolites", "full_unfiltered", "cytokines_new"
+4. Download harmonized GWAS you want to analyze and distribute in any proprtion among created subfolders
