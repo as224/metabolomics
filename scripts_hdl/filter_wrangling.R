@@ -13,6 +13,9 @@ min_overlap <- 95 # Adjust as needed
 
 files <- list.files(path = input_directory, pattern = "\\.txt$", full.names = TRUE)
 
+# Count the files removed
+counter <- 0
+
 # Loop over directory and remove files 
 for (txt_file in files) {
   # Read file
@@ -33,7 +36,13 @@ for (txt_file in files) {
         # Remove files
         file.remove(txt_file)
         file.remove(rds_file)
+        
+        # Update counter
+        counter <- counter + 1
       }
     } 
   }
 }
+
+print(paste(counter, "were removed and", length(files)-counter, "are left."))
+
